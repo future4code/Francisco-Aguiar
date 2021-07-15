@@ -47,15 +47,17 @@ console.log ("Olá, ",nome,". Você tem", idade, "anos.")
 
 // 2
 
-let perguntas = (prompt("Você é estudante?"), prompt ("Você tem mais de 18 anos?"), prompt ("Você está usando luvas?"))
+let pergunta1 = prompt ("Você é estudante?")
+let pergunta2 = prompt ("Você está usando meia?") 
+let pergunta3 = prompt ("Você almoçou hoje?")
 
-let resposta1 = "Sim"
-let resposta2 = "Sim"
-let resposta3 = "Não" 
+let resposta1 = pergunta1
+let resposta2 = pergunta2
+let resposta3 = pergunta3
 
-console.log ("Você é estudante? - ", resposta1)
-console.log ("Você tem mais de 18 anos? - ", resposta2)
-console.log ("Você está usando luvas? - ", resposta3)
+console.log ("Você é estudante? -", resposta1)
+console.log ("Você está usando meia? -", resposta2)
+console.log ("Você almoçou hoje? -", resposta3)
 
 // 3
 let a = 10
