@@ -123,15 +123,15 @@ function checaRenovacaoRG() {
   const tempoEmissao = Number(currentYear) - Number(idYear)
 
   if (idadeAtual <= 20 && tempoEmissao / 5 >= 1)
-    console.log(Boolean(true))
+    {console.log(Boolean(true))}
 
-  else if (20 < idadeAtual <= 50 && tempoEmissao / 10 >= 1)
-      console.log(Boolean(true))
+  else if (20 < idadeAtual && idadeAtual <= 50 && tempoEmissao / 10 >= 1)
+      { console.log(Boolean(true)) }
 
   else if (idadeAtual > 50 && tempoEmissao / 15 > 1)
-        console.log (Boolean(true))
+        {console.log (Boolean(true)) }
 
-  else console.log(Boolean(false))
+  else {console.log(Boolean(false))}
 
 }
 
