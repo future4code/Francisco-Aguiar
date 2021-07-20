@@ -90,16 +90,21 @@ function calculaIngressosEspetaculo() {
 
 // Exercício 8
 function checaStringsMesmoTamanho() {
-  const stringOne = prompt ("Digite uma palavra.")
-  const stringTwo = prompt ("Digite outra palavra.")
+  // const stringOne = prompt ("Digite uma palavra.")
+  // const stringTwo = prompt ("Digite outra palavra.")
 
-  if (stringOne.length == stringTwo.length)
-    console.log (Boolean(true))
+  // if (stringOne.length == stringTwo.length)
+  //   console.log (Boolean(true))
 
-    else console.log (Boolean(false))
+  //   else console.log (Boolean(false))
+
+  // O código acima eu havia feito antes de assitir a aula de comparadores. Havia pesquisado no google, me deparei com o "if" e o "else", me obriguei a entender antes da aula para resolver o exercicio rsrsrsrs.
 
 
+const stringOne = prompt("Digite uma palavra.")
+const stringTwo = prompt("Digite outra palavra.")
 
+console.log (stringOne.length === stringTwo.length)
 }
 
 // Exercício 9
@@ -111,56 +116,88 @@ function checaIgualdadeDesconsiderandoCase() {
     console.log (Boolean(true))
 
     else console.log (false)
+
+  
 }
 
 // Exercício 10
 function checaRenovacaoRG() {
-  const currentYear = prompt("Em que ano estamos?")
-  const bornYear = prompt ("Em que ano você nasceu?")
-  const idYear = prompt ("Em qual ano sua identidade foi emitida?")
+  // const currentYear = prompt("Em que ano estamos?")
+  // const bornYear = prompt ("Em que ano você nasceu?")
+  // const idYear = prompt ("Em qual ano sua identidade foi emitida?")
 
-  const idadeAtual = Number(currentYear) - Number(bornYear)
-  const tempoEmissao = Number(currentYear) - Number(idYear)
+  // const idadeAtual = Number(currentYear) - Number(bornYear)
+  // const tempoEmissao = Number(currentYear) - Number(idYear)
 
-  if (idadeAtual <= 20 && tempoEmissao / 5 >= 1)
-    {console.log(Boolean(true))}
+  // if (idadeAtual <= 20 && tempoEmissao / 5 >= 1)
+  //   console.log(Boolean(true))
 
-  else if (20 < idadeAtual && idadeAtual <= 50 && tempoEmissao / 10 >= 1)
-      { console.log(Boolean(true)) }
+  // else if (20 < idadeAtual && idadeAtual <= 50 && tempoEmissao / 10 >= 1)
+  //      console.log(Boolean(true)) 
 
-  else if (idadeAtual > 50 && tempoEmissao / 15 > 1)
-        {console.log (Boolean(true)) }
+  // else if (idadeAtual > 50 && tempoEmissao / 15 > 1)
+  //       console.log (Boolean(true)) 
 
-  else {console.log(Boolean(false))}
+  // else console.log(Boolean(false))
+
+  // Havia feito o código acima antes da aula, através de pesquisas no google.
+
+  const currentYear = Number(prompt("Em que ano estamos?"))
+  const bornYear = Number(prompt ("Em que ano você nasceu?"))
+  const idYear = Number(prompt ("Em qual ano sua identidade foi emitida?"))
+
+  const idadeAtual = currentYear - bornYear
+  const tempoEmissao = currentYear - idYear
+
+  console.log ((idadeAtual <= 20 && tempoEmissao / 5 >= 1) || (idadeAtual > 20 && idadeAtual <= 50 && tempoEmissao / 10 >= 1) || (idadeAtual > 50 && tempoEmissao / 15 > 1))
 
 }
 
 // Exercício 11
 function checaAnoBissexto() {
-  const year = prompt("Digite um ano.")
+  // const year = prompt("Digite um ano.")
   
-  if (year % 400 === 0)
-    console.log (Boolean(true))
+  // if (year % 400 === 0)
+  //   console.log (Boolean(true))
   
-  else if (year % 4 === 0)
-     if (year % 100 ===0 && year % 400 != 0)
-      console.log (Boolean(false))
-      else console.log(Boolean(true)) 
+  // else if (year % 4 === 0)
+  //    if (year % 100 ===0 && year % 400 != 0)
+  //     console.log (Boolean(false))
+  //     else console.log(Boolean(true)) 
 
-  else console.log (Boolean(false))  
+  // else console.log (Boolean(false))  
+  
+  // Havia feito o código acima antes da aula, através de pesquisas no google.
+
+  const year = Number(prompt("Digite um ano."))
+
+  const condicao1 = year % 400 === 0
+  const condicao2 = (year % 4 === 0) 
+  const condicaoExcecao = year % 4 === 0 && year % 100 ===0 && year % 400 != 0
+
+  console.log (condicao1 || (condicao2 && !condicaoExcecao))
+  
+
 
 }
 
 // Exercício 12
 function checaValidadeInscricaoLabenu() {
+  // const suaIdade = prompt("Você tem mais de 18 anos?")
+  // const escolaridade = prompt("Você possui ensino médio completo?")
+  // const horasLivres = prompt("Você possui disponibilidade exclusiva durante os horários do curso?")
+
+
+  // if (suaIdade === "sim" && escolaridade === "sim" && horasLivres === "sim")
+  //   console.log (Boolean(true))
+
+  //   else console.log(Boolean(false))
+
+  // Havia feito o código acima antes da aula, através de pesquisas no google.
+
   const suaIdade = prompt("Você tem mais de 18 anos?")
   const escolaridade = prompt("Você possui ensino médio completo?")
   const horasLivres = prompt("Você possui disponibilidade exclusiva durante os horários do curso?")
 
-
-  if (suaIdade === "sim" && escolaridade === "sim" && horasLivres === "sim")
-    console.log (Boolean(true))
-
-    else console.log(Boolean(false))
-
+  console.log (suaIdade === "sim" && escolaridade === "sim" && horasLivres === "sim")
 }
