@@ -64,7 +64,8 @@ function imprimeTresCoresFavoritas() {
   const corFavorita2 = prompt("Digite sua segunda cor favorita.")
   const corFavorita3 = prompt("Digite sua terceira cor favorita.")
 
-  console.log (new Array (corFavorita1, corFavorita2, corFavorita3))
+  const array = [corFavorita1,corFavorita2,corFavorita3]
+  console.log (array)
 
 
 }
@@ -109,15 +110,23 @@ console.log (stringOne.length === stringTwo.length)
 
 // Exercício 9
 function checaIgualdadeDesconsiderandoCase() {
-  const primeiraPalavra = prompt("Digite uma palavra.")
-  const segundaPalavra = prompt("Digite outra palavra.")
+  // const primeiraPalavra = prompt("Digite uma palavra.")
+  // const segundaPalavra = prompt("Digite outra palavra.")
   
-  if (primeiraPalavra.toUpperCase().includes(segundaPalavra.toUpperCase()))
-    console.log (Boolean(true))
+  // if (primeiraPalavra.toUpperCase().includes(segundaPalavra.toUpperCase()))
+  //   console.log (Boolean(true))
 
-    else console.log (false)
-
+  //   else console.log (false)
   
+  // O código acima foi o que fiz antes de assistir a aula, através de pesquisas no Google.
+
+  let primeiraPalavra = prompt("Digite uma palavra.")
+  let segundaPalavra = prompt("Digite outra palavra.")
+  
+  primeiraPalavra = primeiraPalavra.toUpperCase()
+  segundaPalavra = segundaPalavra.toUpperCase()
+
+  console.log (segundaPalavra.includes(primeiraPalavra))
 }
 
 // Exercício 10
@@ -199,5 +208,5 @@ function checaValidadeInscricaoLabenu() {
   const escolaridade = prompt("Você possui ensino médio completo?")
   const horasLivres = prompt("Você possui disponibilidade exclusiva durante os horários do curso?")
 
-  console.log (suaIdade === "sim" && escolaridade === "sim" && horasLivres === "sim")
+  console.log (suaIdade.toLowerCase() === "sim" && escolaridade.toLowerCase() === "sim" && horasLivres.toLowerCase() === "sim")
 }
