@@ -202,11 +202,13 @@ function checaValidadeInscricaoLabenu() {
 
   //   else console.log(Boolean(false))
 
-  // Havia feito o código acima antes da aula, através de pesquisas no google.
+  // Havia feito o código acima antes da aula, através de pesquisas no google...
+
 
   const suaIdade = prompt("Você tem mais de 18 anos?")
   const escolaridade = prompt("Você possui ensino médio completo?")
   const horasLivres = prompt("Você possui disponibilidade exclusiva durante os horários do curso?")
 
   console.log (suaIdade.toLowerCase() === "sim" && escolaridade.toLowerCase() === "sim" && horasLivres.toLowerCase() === "sim")
+
 }
