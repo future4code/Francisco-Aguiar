@@ -20,8 +20,9 @@
     let cartasDoUsuario = [primeiraCartaUsuario, segundaCartaUsuario]
     let cartasDoComputador = [primeiraCartaComputador, segundaCartaComputador]
 
-    let valorCartasUsuario = primeiraCartaUsuario.valor + segundaCartaUsuario.valor
-    let valorCartasComputador = primeiraCartaComputador.valor + segundaCartaComputador.valor
+    let valorCartasUsuario = cartasDoUsuario.reduce(function(total,numero){return total + numero.valor}, 0)
+    let valorCartasComputador = cartasDoComputador.reduce(function(total1, numero1){return total1 + numero1.valor}, 0)
+
 
       
     const resultado = (valorUsuario, valorComputador) => {
@@ -36,10 +37,10 @@
       }
     }
 
-    const comprarNovaCarta = () => {
-      const novaCarta = comprarCarta() 
-      return novaCarta
-    }
+   //  const comprarNovaCarta = () => {
+   //    const novaCarta = comprarCarta() 
+   //    return novaCarta
+   //  }
 
     if (confirm ("Quer iniciar uma nova rodada?")) {
       console.log (`Usuário - cartas: ${primeiraCartaUsuario.texto} ${segundaCartaUsuario.texto}  - pontuação ${valorCartasUsuario}`)
@@ -55,16 +56,16 @@
          cartasDoUsuario = [primeiraCartaUsuario, segundaCartaUsuario]
          cartasDoComputador = [primeiraCartaComputador, segundaCartaComputador]
   
-         valorCartasUsuario = primeiraCartaUsuario.valor + segundaCartaUsuario.valor
-         valorCartasComputador = primeiraCartaComputador.valor + segundaCartaComputador.valor
-
+         valorCartasUsuario = cartasDoUsuario.reduce(function(total,numero){return total + numero.valor}, 0)
+         valorCartasComputador = cartasDoComputador.reduce(function(total1, numero1){return total1 + numero1.valor}, 0)
+     
          console.log (`Usuário - cartas: ${primeiraCartaUsuario.texto} ${segundaCartaUsuario.texto}  - pontuação ${valorCartasUsuario}`);
          console.log (`Computador - cartas: ${primeiraCartaComputador.texto}`);
 
       }
 
-      const querMaisCartas = confirm(`Suas cartas são ${primeiraCartaUsuario.texto} ${segundaCartaUsuario.texto}. A carta revelada do computador é ${primeiraCartaComputador.texto}. \n Deseja comprar mais uma carta?`)
-      // for (; querMaisCartas === true ; )
+      const querMaisCartas = confirm(`Suas cartas são ${cartasDoUsuario}. A carta revelada do computador é ${primeiraCartaComputador.texto}. \n Deseja comprar mais uma carta?`)
+      
 
 
 
