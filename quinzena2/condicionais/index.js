@@ -102,9 +102,229 @@ if (generoDoFilme2.toLowerCase() === "fantasia" && precoIngresso2 < 15) {
 // 02
 
 const nomeCompletoComprador = prompt ("Digite seu nome completo.")
-const tipoJogo = prompt ("Digite o tipo do jogo. (IN - internacional / DO - doméstico")
+const tipoJogo = prompt ("Digite o tipo do jogo. (IN - internacional / DO - doméstico)")
 const etapaJogo = prompt("Qual a etapa do jogo? (SF - semifinal / DT - decisão terceiro lugar / FI - final)")
-const categoria = prompt ("Qual a categoria? (1 , 2 , 3 ou 4)")
+const categoria = Number(prompt ("Qual a categoria? (1 , 2 , 3 ou 4)"))
 const quantidadeIngressos = Number(prompt("Digite a quantidade de ingressos."))
 
-// Terminarei o Desafio em breve... Bastante cansado para continuar hoje ... 
+console.log ("---Dados da compra---")
+console.log (`Nome do cliente: ${nomeCompletoComprador}`)
+
+let valorIngresso
+
+if (tipoJogo.toUpperCase() === "DO") {
+    console.log( "Tipo do jogo: Nacional")
+
+    if(etapaJogo.toUpperCase() === "SF") {
+        console.log ("Etapa do jogo: Semifinal")
+
+        if (categoria === 1){
+            valorIngresso = 1320
+            console.log ("Categoria: 1")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: R$", valorIngresso)
+            console.log ("Valor total: R$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 2){
+            valorIngresso = 880
+            console.log ("Categoria: 2")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: R$", valorIngresso)
+            console.log ("Valor total: R$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 3) {
+            valorIngresso = 550
+            console.log ("Categoria: 3")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: R$", valorIngresso)
+            console.log ("Valor total: R$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 4) {
+            valorIngresso = 220
+            console.log ("Categoria: 4")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: R$", valorIngresso)
+            console.log ("Valor total: R$", quantidadeIngressos*valorIngresso)
+        } else {console.log ("Digite uma categoria válida.")}
+
+
+
+
+    } else if (etapaJogo.toUpperCase() === "DT"){
+        console.log ("Etapa do jogo: Decisão do 3º lugar")
+
+        if (categoria === 1){
+            valorIngresso = 660
+            console.log ("Categoria: 1")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: R$", valorIngresso)
+            console.log ("Valor total: R$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 2){
+            valorIngresso = 440
+            console.log ("Categoria: 2")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: R$", valorIngresso)
+            console.log ("Valor total: R$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 3) {
+            valorIngresso = 330
+            console.log ("Categoria: 3")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: R$", valorIngresso)
+            console.log ("Valor total: R$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 4) {
+            valorIngresso = 170
+            console.log ("Categoria: 4")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: R$", valorIngresso)
+            console.log ("Valor total: R$", quantidadeIngressos*valorIngresso)
+        } else {console.log ("Digite uma categoria válida.")}
+        
+    } else if (etapaJogo.toUpperCase() === "FI"){
+        console.log ("Etapa do jogo: Final")
+
+        if (categoria === 1){
+            valorIngresso = 1980
+            console.log ("Categoria: 1")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: R$", valorIngresso)
+            console.log ("Valor total: R$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 2){
+            valorIngresso = 1320
+            console.log ("Categoria: 2")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: R$", valorIngresso)
+            console.log ("Valor total: R$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 3) {
+            valorIngresso = 880
+            console.log ("Categoria: 3")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: R$", valorIngresso)
+            console.log ("Valor total: R$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 4) {
+            valorIngresso = 330
+            console.log ("Categoria: 4")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: R$", valorIngresso)
+            console.log ("Valor total: R$", quantidadeIngressos*valorIngresso)
+        } else {console.log ("Digite uma categoria válida.")}
+    } else {console.log ("Digite uma etapa do jogo válida.")}
+
+
+} else if (tipoJogo.toUpperCase() === "IN") {
+    console.log( "Tipo do jogo: Internacional")
+
+    if(etapaJogo.toUpperCase() === "SF") {
+        console.log ("Etapa do jogo: Semifinal")
+
+        if (categoria === 1){
+            valorIngresso = 1320 * 4.10
+            console.log ("Categoria: 1")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: U$", valorIngresso)
+            console.log ("Valor total: U$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 2){
+            valorIngresso = 880 * 4.10
+            console.log ("Categoria: 2")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: U$", valorIngresso)
+            console.log ("Valor total: U$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 3) {
+            valorIngresso = 550 * 4.10
+            console.log ("Categoria: 3")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: U$", valorIngresso)
+            console.log ("Valor total: U$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 4) {
+            valorIngresso = 220 * 4.10
+            console.log ("Categoria: 4")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: U$", valorIngresso)
+            console.log ("Valor total: U$", quantidadeIngressos*valorIngresso)
+        } else {console.log ("Digite uma categoria válida.")}
+
+
+
+
+    } else if (etapaJogo.toUpperCase() === "DT"){
+        console.log ("Etapa do jogo: Decisão do 3º lugar")
+
+        if (categoria === 1){
+            valorIngresso = 660 * 4.10
+            console.log ("Categoria: 1")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: U$", valorIngresso)
+            console.log ("Valor total: U$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 2){
+            valorIngresso = 440 * 4.10
+            console.log ("Categoria: 2")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: U$", valorIngresso)
+            console.log ("Valor total: U$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 3) {
+            valorIngresso = 330 * 4.10
+            console.log ("Categoria: 3")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: U$", valorIngresso)
+            console.log ("Valor total: U$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 4) {
+            valorIngresso = 170 * 4.10
+            console.log ("Categoria: 4")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: U$", valorIngresso)
+            console.log ("Valor total: U$", quantidadeIngressos*valorIngresso)
+        } else {console.log ("Digite uma categoria válida.")}
+        
+    } else if (etapaJogo.toUpperCase() === "FI"){
+        console.log ("Etapa do jogo: Final")
+
+        if (categoria === 1){
+            valorIngresso = 1980 * 4.10
+            console.log ("Categoria: 1")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: U$", valorIngresso)
+            console.log ("Valor total: U$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 2){
+            valorIngresso = 1320 * 4.10
+            console.log ("Categoria: 2")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: U$", valorIngresso)
+            console.log ("Valor total: U$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 3) {
+            valorIngresso = 880 * 4.10
+            console.log ("Categoria: 3")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: U$", valorIngresso)
+            console.log ("Valor total: U$", quantidadeIngressos*valorIngresso)
+        } else if (categoria === 4) {
+            valorIngresso = 330 * 4.10
+            console.log ("Categoria: 4")
+            console.log (`Quantidade de Ingressos: ${quantidadeIngressos} ingressos`)
+            console.log ("---Valores---")
+            console.log ("Valor do ingresso: U$", valorIngresso)
+            console.log ("Valor total: U$", quantidadeIngressos*valorIngresso)
+        } else {console.log ("Digite uma categoria válida.")}
+    } else {console.log ("Digite uma etapa do jogo válida.")}
+
+
+} else {console.log ("Digite um tipo de jogo válido.")}
+
