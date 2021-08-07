@@ -24,19 +24,7 @@
     let valorCartasComputador = primeiraCartaComputador.valor + segundaCartaComputador.valor
 
 
-      
-    const resultado = (valorUsuario, valorComputador) => {
-      if (valorUsuario > 21){
-         console.log ("O computador ganhou!")
-      }
-      else if (valorComputador > 21 && valorUsuario <= 21){
-         console.log ("O usuário ganhou!")
-      }
-      else if (valorComputador === valorUsuario) {
-         console.log ("Empate")
-      }
-      
-    }
+
 
     if (confirm ("Quer iniciar uma nova rodada?")) {
       console.log (`Usuário - cartas: ${primeiraCartaUsuario.texto} ${segundaCartaUsuario.texto}  - pontuação ${valorCartasUsuario}`)
