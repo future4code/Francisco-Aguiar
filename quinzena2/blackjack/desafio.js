@@ -17,30 +17,26 @@
     let primeiraCartaComputador = comprarCarta()
     let segundaCartaComputador = comprarCarta()
    
-    let cartasDoUsuario = [primeiraCartaUsuario, segundaCartaUsuario]
-    let cartasDoComputador = [primeiraCartaComputador, segundaCartaComputador]
+    let cartasDoUsuario = [primeiraCartaUsuario.texto, segundaCartaUsuario.texto]
+    let cartasDoComputador = [primeiraCartaComputador.texto, segundaCartaComputador.texto]
 
-    let valorCartasUsuario = cartasDoUsuario.reduce(function(total,numero){return total + numero.valor}, 0)
-    let valorCartasComputador = cartasDoComputador.reduce(function(total1, numero1){return total1 + numero1.valor}, 0)
+    let valorCartasUsuario = primeiraCartaUsuario.valor + segundaCartaUsuario.valor
+    let valorCartasComputador = primeiraCartaComputador.valor + segundaCartaComputador.valor
 
 
       
     const resultado = (valorUsuario, valorComputador) => {
-      if (valorUsuario > valorComputador){
-         console.log ("O usuário ganhou!")
-      }
-      else if (valorUsuario < valorComputador){
+      if (valorUsuario > 21){
          console.log ("O computador ganhou!")
       }
-      else {
+      else if (valorComputador > 21 && valorUsuario <= 21){
+         console.log ("O usuário ganhou!")
+      }
+      else if (valorComputador === valorUsuario) {
          console.log ("Empate")
       }
+      
     }
-
-   //  const comprarNovaCarta = () => {
-   //    const novaCarta = comprarCarta() 
-   //    return novaCarta
-   //  }
 
     if (confirm ("Quer iniciar uma nova rodada?")) {
       console.log (`Usuário - cartas: ${primeiraCartaUsuario.texto} ${segundaCartaUsuario.texto}  - pontuação ${valorCartasUsuario}`)
@@ -53,11 +49,12 @@
          primeiraCartaComputador = comprarCarta()
          segundaCartaComputador = comprarCarta()
       
-         cartasDoUsuario = [primeiraCartaUsuario, segundaCartaUsuario]
-         cartasDoComputador = [primeiraCartaComputador, segundaCartaComputador]
+         cartasDoUsuario = [primeiraCartaUsuario.texto, segundaCartaUsuario.texto]
+         cartasDoComputador = [primeiraCartaComputador.texto, segundaCartaComputador.texto]
   
-         valorCartasUsuario = cartasDoUsuario.reduce(function(total,numero){return total + numero.valor}, 0)
-         valorCartasComputador = cartasDoComputador.reduce(function(total1, numero1){return total1 + numero1.valor}, 0)
+         valorCartasUsuario = primeiraCartaUsuario.valor + segundaCartaUsuario.valor
+         valorCartasComputador = primeiraCartaComputador.valor + segundaCartaComputador.valor
+
      
          console.log (`Usuário - cartas: ${primeiraCartaUsuario.texto} ${segundaCartaUsuario.texto}  - pontuação ${valorCartasUsuario}`);
          console.log (`Computador - cartas: ${primeiraCartaComputador.texto}`);
@@ -65,15 +62,67 @@
       }
 
       const querMaisCartas = confirm(`Suas cartas são ${cartasDoUsuario}. A carta revelada do computador é ${primeiraCartaComputador.texto}. \n Deseja comprar mais uma carta?`)
+   
+      
+
+      while (querMaisCartas === true) {
+         let novaCartaComprada = comprarCarta()
+         valorCartasUsuario = valorCartasUsuario + novaCartaComprada.valor
+         cartasDoUsuario.push(novaCartaComprada.texto)
+
+         
+
+         if (valorCartasUsuario <= 21) {
+            const pergunta = confirm(`Suas cartas são ${cartasDoUsuario}. A carta revelada do computador é ${primeiraCartaComputador.texto}. \n Deseja comprar mais uma carta?`)
+            if (pergunta === false) {
+               break
+            }
+   
+         }
+         else if (valorCartasUsuario > 21) {
+            alert (`Suas cartas são ${cartasDoUsuario}. Sua pontuação é ${valorCartasUsuario}. \n As cartas do computador são ${cartasDoComputador}. A pontuação do computador é ${valorCartasComputador}. \n O computador ganhou!`)
+
+            console.log (`Suas cartas são ${cartasDoUsuario}. Sua pontuação é ${valorCartasUsuario}. \n As cartas do computador são ${cartasDoComputador}. A pontuação do computador é ${valorCartasComputador}. \n O computador ganhou!`)
+            break
+       
+
+            
+         }
+
+      }
+   
+
+      if (valorCartasUsuario <= 21) {
+         while (valorCartasComputador < valorCartasUsuario) {
+            let novaCartaComputador = comprarCarta()
+            valorCartasComputador = valorCartasComputador + novaCartaComputador.valor
+            cartasDoComputador.push(novaCartaComputador.texto)
+
+
+            if (valorCartasComputador > 21) {
+               console.log (`Suas cartas são ${cartasDoUsuario}. Sua pontuação é ${valorCartasUsuario}. \n As cartas do computador são ${cartasDoComputador}. A pontuação do computador é ${valorCartasComputador}. \n O usuário ganhou!`)
+            }
+            
+
+         }
+         if (valorCartasUsuario === valorCartasComputador){
+            console.log (`Suas cartas são ${cartasDoUsuario}. Sua pontuação é ${valorCartasUsuario}. \n As cartas do computador são ${cartasDoComputador}. A pontuação do computador é ${valorCartasComputador}. \n O jogo terminou empatado!`)
+            
+         }
+         if (valorCartasComputador > valorCartasUsuario) {
+            console.log (`Suas cartas são ${cartasDoUsuario}. Sua pontuação é ${valorCartasUsuario}. \n As cartas do computador são ${cartasDoComputador}. A pontuação do computador é ${valorCartasComputador}. \n O computador venceu.`)
+            
+
+         }
+      }
+         
+      }
+
       
 
 
-
-      resultado(valorCartasUsuario, valorCartasComputador)
-     
    
-    }
-
+   
     else {
       console.log ("O jogo acabou.")
     }
