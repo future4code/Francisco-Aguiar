@@ -16,6 +16,14 @@ function inverteArray(array) {
 
 // EXERCÍCIO 02
 function retornaNumerosParesElevadosADois(array) {
+  const arrayDeNumerosParesAoQuadrado = array.filter ((iten, indice, array) => {
+    if (iten % 2 ===0) {
+      return iten
+
+    }
+  }).map ((iten, indice, array) => {return iten*iten})
+
+  return arrayDeNumerosParesAoQuadrado
 
 }
 
