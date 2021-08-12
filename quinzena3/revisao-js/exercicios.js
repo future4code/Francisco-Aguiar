@@ -121,6 +121,48 @@ function comparaDoisNumeros(num1, num2) {
   //   maiorDivisivelPorMenor: Y,
   //   diferenca: Z
   // }
+
+  const comparandoNumeros = {maiorNumero: "" , maiorDivisivelPorMenor:"" , diferenca: "" }
+
+  const numeroMaior = (num1, num2) => {
+    if (num1 >= num2) {
+      return comparandoNumeros.maiorNumero = num1
+    }
+    else if (num1 < num2) {
+      return comparandoNumeros.maiorNumero = num2
+    }
+  }
+  numeroMaior(num1,num2)
+
+  const saoDivisiveis = (num1, num2) => {
+    if (comparandoNumeros.maiorNumero === num1){
+      if (num1 % num2 === 0) {
+        return comparandoNumeros.maiorDivisivelPorMenor = true
+      } else {return comparandoNumeros.maiorDivisivelPorMenor = false}
+
+    }
+    else if (comparandoNumeros.maiorNumero === num2) {
+      if (num2 % num1 ===0) {
+        return comparandoNumeros.maiorDivisivelPorMenor = true
+      } else {return comparandoNumeros.maiorDivisivelPorMenor = false}
+    }
+  }
+
+  saoDivisiveis (num1, num2)
+
+  const diferencaEntreOsNumeros = (num1, num2) => {
+    if (num1 >= num2) {
+      return comparandoNumeros.diferenca = num1 - num2
+    }
+    else if (num2 > num1) {
+      return comparandoNumeros.diferenca = num2 - num1
+    }
+  }
+
+  diferencaEntreOsNumeros (num1,num2)
+
+
+  return comparandoNumeros
 }
 
 // EXERCÍCIO 10
