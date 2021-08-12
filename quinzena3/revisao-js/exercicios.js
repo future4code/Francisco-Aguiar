@@ -35,18 +35,19 @@ function retornaNumerosPares(array) {
       arrayDeNumerosPares.push(num)
     }
   }
+
   return arrayDeNumerosPares
 }
 
 // EXERCÍCIO 04
 function retornaMaiorNumero(array) {
-  let maior = 0
+  let numeroMaior = 0
   for (let num of array) {
-    if (num > maior) {
-      maior = num
+    if (num > numeroMaior) {
+      numeroMaior = num
     }
   }
-  return maior
+  return numeroMaior
 }
 
 // EXERCÍCIO 05
