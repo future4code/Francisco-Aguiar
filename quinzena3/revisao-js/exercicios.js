@@ -1,14 +1,15 @@
 // EXERCÍCIO 01
 function inverteArray(array) {
-  let novoArray = []
-  for ( let i = (array.length() - 1) ; i > 0; i--) {
-      
-    let elemento = array[i]
-    novoArray.push(elemento)
-      
-    }
   
-  return novoArray
+  let arrayInvertido = []
+  let i = (array.length - 1)
+  let elemento
+  for (i; i >= 0; i--) {
+    elemento = array[i]
+    arrayInvertido.push(elemento)
+  }
+  
+  return arrayInvertido
 }
   
 
