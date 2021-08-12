@@ -95,9 +95,22 @@ function retornaNNumerosPares(n) {
 
 // EXERCÍCIO 08
 function checaTriangulo(a, b, c) {
+
+    if (a === b && a === c) {
+      return "Equilátero"
+    }
+    else if ((a===b) || (a===c) || (b===c)) {
+      return "Isósceles"
+    }
+    else if ( (a !== b) && (a !== c) && (b !== c)) {
+      return "Escaleno"
+    }
+
   // return 'Escaleno'
   // return 'Equilátero'
   // return 'Isósceles'
+
+
 }
 
 // EXERCÍCIO 09
