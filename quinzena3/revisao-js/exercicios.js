@@ -1,15 +1,14 @@
 // EXERCÍCIO 01
 function inverteArray(array) {
-  function arrayInvertido (array) {
-    
-    for ( let i = (array.length() - 1) ; i >= 0; i--) {
-      let novoArray = []
-      let elemento = array[i]
-      novoArray.push(elemento)
-      return novoArray
+  let novoArray = []
+  for ( let i = (array.length() - 1) ; i > 0; i--) {
+      
+    let elemento = array[i]
+    novoArray.push(elemento)
+      
     }
-  }
   
+  return novoArray
 }
   
 
@@ -21,10 +20,13 @@ function retornaNumerosParesElevadosADois(array) {
 
 // EXERCÍCIO 03
 function retornaNumerosPares(array) {
-  const numerosPares = array.map ((iten, index, array) => {
-    return iten % 2 ===0
-  })
-
+  let arrayDeNumerosPares = []
+  for (let num of array) {
+    if (num % 2 === 0) {
+      arrayDeNumerosPares.push(num)
+    }
+  }
+  return arrayDeNumerosPares
 }
 
 // EXERCÍCIO 04
@@ -35,7 +37,7 @@ function retornaMaiorNumero(array) {
       maior = num
     }
   }
-
+  return maior
 }
 
 // EXERCÍCIO 05
