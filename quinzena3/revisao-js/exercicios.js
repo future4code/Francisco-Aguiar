@@ -205,6 +205,14 @@ function imprimeChamada() {
 
 // EXERCÍCIO 14
 function criaRetangulo(lado1, lado2) {
+  const informacoesDoRetangulo = {largura: "", altura: "", perimetro: "", area: ""}
+
+  informacoesDoRetangulo.largura = lado1
+  informacoesDoRetangulo.altura = lado2
+  informacoesDoRetangulo.perimetro =  (2 * (lado1 + lado2))
+  informacoesDoRetangulo.area =  (lado1 * lado2)
+
+  return informacoesDoRetangulo
 
 }
 
