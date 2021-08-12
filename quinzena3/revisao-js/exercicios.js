@@ -79,6 +79,17 @@ function retornaExpressoesBooleanas() {
 
 // EXERCÍCIO 07
 function retornaNNumerosPares(n) {
+  let arrayDeNumerosAteN = []
+  let numeroDeElementos = arrayDeNumerosAteN.length
+  let i = 0
+  while (numeroDeElementos < n) {
+    arrayDeNumerosAteN.push (i)
+    i = i + 2
+    numeroDeElementos = arrayDeNumerosAteN.length
+  }
+
+  return arrayDeNumerosAteN
+
 
 }
 
