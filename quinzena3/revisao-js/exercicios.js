@@ -217,6 +217,9 @@ else if (array.length === 2){
 
   }
 }
+else if (array.length === 1) {
+  return arrayMaiorEMenorNumeros = [array[0], array[0]]
+}
   
 
 return arrayMaiorEMenorNumeros
@@ -327,6 +330,12 @@ function menoresDe18(arrayDePessoas) {
 
 // EXERCÍCIO 17A
 function multiplicaArrayPor2(array) {
+  const arrayDeEntrada = array
+  const arrayMultiplicadoPorDois = arrayDeEntrada.map ((iten, indice, array) => {
+    return iten*2})
+
+  
+  return arrayMultiplicadoPorDois
 
 }
 
