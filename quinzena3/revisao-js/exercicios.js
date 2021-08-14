@@ -302,7 +302,14 @@ function anonimizaPessoa(pessoa) {
 
 // EXERCÍCIO 16A
 function maioresDe18(arrayDePessoas) {
+  let arrayDeAdultos = []
+  const novoArrayDeAdultos = arrayDePessoas.filter((iten, indice, array) => {
+    if (iten.idade >= 18) {
+      arrayDeAdultos.push (iten)
+    }
+  }) 
 
+  return arrayDeAdultos
 }
 
 // EXERCÍCIO 16B
