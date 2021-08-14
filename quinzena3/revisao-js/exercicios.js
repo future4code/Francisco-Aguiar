@@ -353,6 +353,19 @@ function multiplicaArrayPor2S(array) {
 
 // EXERCÍCIO 17C
 function verificaParidade(array) {
+  const arrayDeEntrada = array
+  const arrayMultiplicadoPorDoisEmString = arrayDeEntrada.map ((iten, indice, array) => {
+    
+    if (iten % 2 === 0) {
+      iten = `${iten} é par`
+    } else {
+      iten = `${iten} é ímpar`
+    }
+    return iten 
+  })
+
+  return arrayMultiplicadoPorDoisEmString
+  
 
 }
 
