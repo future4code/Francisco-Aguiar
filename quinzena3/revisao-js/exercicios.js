@@ -371,6 +371,11 @@ function verificaParidade(array) {
 
 // EXERCÍCIO 18A
 function retornaPessoasAutorizadas(pessoas) {
+  const pessoasAptasAEntrarNoBrinquedo = pessoas.filter((iten, indice, array) => {
+    return iten.altura >=1.5 && iten.idade > 14 && iten.idade < 60
+  })
+
+  return pessoasAptasAEntrarNoBrinquedo
 
 }
 
