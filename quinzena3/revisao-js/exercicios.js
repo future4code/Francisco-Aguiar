@@ -230,7 +230,23 @@ return arrayMaiorEMenorNumeros
 
 // EXERCÍCIO 11
 function ordenaArray(array) {
-
+  let arrayInvertido = array
+  function bubbleSort(array) {
+    const tamanhoArray = array.length
+    for (let i = 0; i< tamanhoArray; i++) {
+      for (let j = 0; j < (tamanhoArray - i - 1); j++) {
+        if (array[j] > array[j+1]) {
+          let invertePosicao = array[j]
+          array[j] = array[j+1]
+          array[j+1] = invertePosicao
+        }
+      }
+    }
+    
+  }
+ bubbleSort (arrayInvertido)
+ return arrayInvertido 
+  
 }
 
 // EXERCÍCIO 12
