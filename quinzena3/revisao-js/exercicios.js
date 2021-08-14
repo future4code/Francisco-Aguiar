@@ -314,6 +314,14 @@ function maioresDe18(arrayDePessoas) {
 
 // EXERCÍCIO 16B
 function menoresDe18(arrayDePessoas) {
+  let arrayDeMenores = []
+  const novoArrayDeMenores = arrayDePessoas.filter((iten, indice, array) => {
+    if (iten.idade < 18) {
+      arrayDeMenores.push(iten)
+    }
+  })
+  
+  return arrayDeMenores
 
 }
 
