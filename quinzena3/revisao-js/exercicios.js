@@ -381,6 +381,11 @@ function retornaPessoasAutorizadas(pessoas) {
 
 // EXERCÍCIO 18B
 function retornaPessoasNaoAutorizadas(pessoas) {
+  const pessoasInaptasABrincar = pessoas.filter ((iten, indice, array) => {
+    return iten.altura < 1.5 || iten.idade <= 14 || iten.idade >= 60
+  })
+
+  return pessoasInaptasABrincar
 
 }
 
