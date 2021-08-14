@@ -403,16 +403,6 @@ function ordenaPorData(consultasData) {
 // EXERCÍCIO 20
 function calculaSaldo(contas) {
   let somatorioDasCompras = 0
-  // let arrayDasCompras = contas.compras 
-  // const arrayDeSomatoriosDasCompras = arrayDasCompras.map ((iten, indice, array) => {
-  //   let somaDosElementosDoArrayDasCompras = 0
-  //   for (let i=0; i < iten.length; i++){
-  //     somaDosElementosDoArrayDasCompras += iten[i]
-  //   }
-  //   return somaDosElementosDoArrayDasCompras
-  // })
-  // arrayDeSomatoriosDasCompras()
-
   const contasAtualizadas = contas.map ((iten, indice, array) => {
     for (let i=0; i < iten.compras.length; i++) {
       somatorioDasCompras = somatorioDasCompras + iten.compras[i]
