@@ -341,8 +341,15 @@ function multiplicaArrayPor2(array) {
 
 // EXERCÍCIO 17B
 function multiplicaArrayPor2S(array) {
+  const arrayDeEntrada = array
+  const arrayMultiplicadoPorDoisString = arrayDeEntrada.map ((iten, indice, array) => {
+    let string = iten*2
+    string = string.toString()
+    return string 
+  })
 
-}
+  return arrayMultiplicadoPorDoisString
+} 
 
 // EXERCÍCIO 17C
 function verificaParidade(array) {
