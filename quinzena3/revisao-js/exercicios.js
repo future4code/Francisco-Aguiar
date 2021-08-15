@@ -106,10 +106,6 @@ function checaTriangulo(a, b, c) {
       return "Escaleno"
     }
 
-  // return 'Escaleno'
-  // return 'Equilátero'
-  // return 'Isósceles'
-
 
 }
 
