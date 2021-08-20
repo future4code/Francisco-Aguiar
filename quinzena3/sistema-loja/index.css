@@ -1,0 +1,52 @@
+.logomarca{
+    background-color: #bfbeff;
+    display: block;
+    text-align: center;
+    
+}
+
+.logomarca img {
+    width: 200px;
+    
+}
+
+.cabecalho {
+    text-align: center;
+    font-size: 3vh;
+    margin-top: 5vh;
+}
+
+.cabecalho a {
+    margin-right: 2vh;
+}
+
+
+.historia img {
+    width: 400px;
+}
+
+.texto {
+    text-align: center;
+    background-color:#bfbeff;
+    
+}
+
+.redes-sociais img{
+    width: 80px;
+    margin-right: 5vw;
+    
+
+}
+
+.redes-sociais {
+    text-align: center;
+    font-size: 30px;
+}
+
+.produtos img {
+    width: 200px;
+}
+
+.produtos {
+    margin-left: 400px;
+}
