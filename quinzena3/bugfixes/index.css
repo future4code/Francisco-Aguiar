@@ -55,7 +55,7 @@ div img {
     font-size: 20px;
     color: rgb(153, 147, 147);
     position: absolute;
-    top: 670px;
+    top: 1000px;
     left: 550px;
 }
 .botao-amarelo:active {
@@ -69,7 +69,8 @@ div img {
 .container {
     height: 500px;
     text-align: center;
-    padding-top: 25px;
+    padding-top: 150px;
+    
 }
 
 .icone {
@@ -86,10 +87,12 @@ div img {
 #container-de-descricao {
     background-color: #2274a5;
     color: white;
+            
 }
 
 #container-de-descricao>ol {
-    padding: 15px 0px;
+    padding: 15px 550px;
+    
 }
 
 #container-para-comprar {
@@ -150,6 +153,10 @@ td button:active{
     border-radius: 5px;
     font-size: 10px;
     color: black;
+    position: absolute;
+    left: 44%;
+    top: 501px;
+    
 }
 
 #back-button:hover {
