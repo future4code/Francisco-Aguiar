@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 header {
@@ -18,7 +19,7 @@ header {
     
 }
 
-#lupa-busca {
+.lupa-busca {
     width: 20px;
 }
 
@@ -32,7 +33,7 @@ footer {
 }
 
 
-main{
+.conteudo {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
