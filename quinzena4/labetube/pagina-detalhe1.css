@@ -1,0 +1,16 @@
+
+.corpo-da-pag {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+      
+}
+
+.div-do-video>video {
+    width: 100%;
+}
+
+.div-do-titulo{
+    padding-bottom: 20px;
+   
+}

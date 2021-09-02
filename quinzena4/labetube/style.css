@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: rgb(167, 11, 133);
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+
+}
+
+.campo-de-busca {
+    display: flex;
+    
+}
+
+.lupa-busca {
+    width: 20px;
+}
+
+footer {
+    display: flex;
+    background-color: gray;
+    height: 50px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.conteudo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    padding: 11px;
+}
+
+.card-do-video {
+    box-shadow: 2px 2px 8px gray;
+    
+}
+
+.img-card {
+    width: 100%;
+}
+
+.titulo-card {
+    padding: 5px;
+}
