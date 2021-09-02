@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 0.5fr 10fr 1fr;
+    
+}
+
+
+header, footer{
+    background-color: mediumvioletred;
+    height: 70px;
+    
+}
+header, footer {
+    padding: 0 15px;
+}
+
+#bolinho-icone{
+    width: 10px;
+}
+
+header{
+    display: grid;
+    grid-template-columns: 1fr 30fr 1fr;
+    
+}
+
+#bolinho-icone, #logout{
+    justify-self: end;
+    align-self: center;
+}
+
+#texto-header{
+    justify-self: start;
+    align-self: center;
+    padding: 0 15px;
+    font-size: 25px; 
+}
+
+#bolinho-icone{
+    width: 20px;
+}
+
+#logout {
+    width: 50px;
+    height: 25px;
+    font-size: 15px;
+}
+
+footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+main{
+    display: grid;
+    grid-template-columns: 3fr 8fr;
+}
+
+#menu {
+    background-color: #f2d0e0;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 13fr ;
+    
+}
+.img-menu{
+    width: 15px;
+    justify-self: center;
+    align-self: center;
+}
+
+#menu p {
+    align-self: center;
+}
+
+#produtos{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 10px 10px;
+    row-gap: 10px;
+    column-gap: 15px;
+      
+
+}
+
+.info-do-produto {
+    box-shadow: 1px 1px darkgrey;
+    display: grid;
+    grid-template-rows: 4fr 1fr 1fr;
+}
+
+.info-do-produto img {
+    width: 100%;
+    height: 60%;
+    
+}
+
+.info-do-produto h1 {
+    justify-self: center;
+    align-self: center;
+    font-size: 20px;
+}
+
+.info-do-produto p {
+    text-align: center;
+    }
+
+
+
