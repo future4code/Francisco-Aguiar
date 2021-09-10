@@ -1,14 +1,17 @@
 import React from 'react';
-import './CardPequeno.css'
+// import './CardPequeno.css'
+
+import {SmallCardContainer} from './stylesCardPequeno'
+import {ImgSmallCard} from './stylesCardPequeno'
 
 
 function CardPequeno (props) {
     return(
-        <div className="smallcard-container">
-            <img src= {props.imagem}/>
+        <SmallCardContainer>
+            <ImgSmallCard src= {props.imagem}/>
             <h4>{props.nome}</h4>
             <p>{ props.informacao }</p>
-        </div>
+        </SmallCardContainer>
     )
 }
 

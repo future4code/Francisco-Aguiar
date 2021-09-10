@@ -1,4 +1,6 @@
-.smallcard-container {
+import styled from "styled-components";
+
+export const SmallCardContainer = styled.div `
     display: flex;
     align-items: center;
     justify-content: start;
@@ -8,14 +10,11 @@
     height: 100px;
     width: 40vw;
     gap: 5px;
-}
 
-.smallcard-container > img {
+`
+
+export const ImgSmallCard = styled.img`
     width: 30px;
     margin-right: 10px;
-}
 
-.smallcard-container > div {
-    display: flex;
-    justify-items: flex-start;
-}
+`

@@ -1,22 +1,29 @@
 import React from 'react';
-import './App.css';
-import styled from 'styled-components';
+// import './App.css';
+// import styled from 'styled-components';
+
 import CardGrande from './components/CardGrande/CardGrande';
 import ImagemButton from './components/ImagemButton/ImagemButton';
 import CardPequeno from './components/CardPequeno/CardPequeno';
+
 import fotoPerfil from './img/fotoPerfil.jpg';
 import logoMsF from './img/logoMsF.jpg';
 import logoCF from './img/logoCF.png';
 import email from './img/email.png'
 import endereco from './img/endereco.png'
 
+import {Ap} from "./styles.js";
+import {PageSectionContainer} from "./styles.js";
+import {TittleSectionContainer} from "./styles.js";
+
+
 
 
 function App() {
   return (
-    <div className="App">
-      <div className="page-section-container">
-        <h2>Dados pessoais</h2>
+    <Ap>
+      <PageSectionContainer>
+        <TittleSectionContainer>Dados pessoais</TittleSectionContainer>
         <CardGrande 
           imagem={fotoPerfil} 
           nome="Hugo Aguiar" 
@@ -27,7 +34,7 @@ function App() {
           imagem="https://image.flaticon.com/icons/png/512/117/117472.png" 
           texto="Ver mais"
         />
-      </div>
+      </PageSectionContainer>
 
       <div> 
         <CardPequeno 
@@ -46,8 +53,8 @@ function App() {
       </div>
 
 
-      <div className="page-section-container">
-        <h2>Experiências profissionais</h2>
+      <PageSectionContainer>
+        <TittleSectionContainer>Experiências profissionais</TittleSectionContainer>
         <CardGrande 
           imagem={logoCF} 
           nome="Casa Feitas - Terceirizado" 
@@ -59,10 +66,10 @@ function App() {
           nome="Mercantil São Francisco - Proprietário" 
           descricao="Comércio Varejista de Alimentos" 
         />
-      </div>
+      </PageSectionContainer>
 
-      <div className="page-section-container">
-        <h2>Minhas redes sociais</h2>
+      <PageSectionContainer>
+        <TittleSectionContainer>Minhas redes sociais</TittleSectionContainer>
         <ImagemButton 
           imagem="https://d2v9ipibika81v.cloudfront.net/uploads/sites/261/2017/01/facebook-logo-3.png" 
           texto="Facebook" 
@@ -72,8 +79,8 @@ function App() {
           imagem="https://logodownload.org/wp-content/uploads/2014/09/twitter-logo-1-1.png" 
           texto="Twitter" 
         />        
-      </div>
-    </div>
+      </PageSectionContainer>
+    </Ap>
   );
 }
 
