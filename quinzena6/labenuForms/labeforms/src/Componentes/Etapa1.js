@@ -2,9 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 
-const BOTAO = styled.button`
-  margin-top: 30px;
-`
 
 class Etapa1 extends React.Component{
     render() {
@@ -33,7 +30,7 @@ class Etapa1 extends React.Component{
       
                 </select>
             </div>
-            <BOTAO>Próxima Etapa</BOTAO>
+            
           </div>            
           
 

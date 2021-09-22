@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const BOTAO = styled.button`
-  margin-top: 30px;
-`
 
 class Etapa2 extends React.Component{
     render() {
@@ -18,7 +15,7 @@ class Etapa2 extends React.Component{
                     <p>6. Qual a unidade de ensino?</p>
                     <input/>
                 </div>
-                <BOTAO>Próxima Etapa</BOTAO>
+                
             </div>
 
         )
