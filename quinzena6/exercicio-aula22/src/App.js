@@ -35,10 +35,15 @@ class App extends React.Component {
     }
 
   componentDidUpdate() {
+    localStorage.setItem ("tarefas", JSON.stringify(this.state.tarefas))
 
   };
 
   componentDidMount() {
+    const pegarTarefas = localStorage.getItem ("tarefas")
+    const pegarTarefasArray = JSON.parse(pegarTarefas)
+
+    this.setState ({tarefas: pegarTarefasArray})
 
   };
 
