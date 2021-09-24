@@ -24,11 +24,6 @@ class App extends React.Component {
         id: Date.now(), 
         texto: 'Estudar JavaScript',
         completa: false 
-      },
-      {
-        id: Date.now(), 
-        texto: 'Estudar HTML',
-        completa: true 
       }],
       inputValue: '',
       filtro: ''
@@ -40,11 +35,15 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    const pegarTarefas = localStorage.getItem ("tarefas")
-    const pegarTarefasArray = JSON.parse(pegarTarefas)
-
-    this.setState ({tarefas: pegarTarefasArray})
-
+    if (localStorage.getItem("tarefa")) {
+      const pegarTarefas = localStorage.getItem ("tarefas")
+      const pegarTarefasArray = JSON.parse(pegarTarefas)
+  
+      this.setState ({tarefas: pegarTarefasArray})
+  
+    }
+    
+    
   };
 
   onChangeInput = (event) => {
