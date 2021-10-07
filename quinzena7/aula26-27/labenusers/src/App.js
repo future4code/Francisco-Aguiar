@@ -53,7 +53,8 @@ export default class App extends React.Component {
     inputNome: "",
     inputEmail: "",
     usuarios: [],
-    paginaRenderizada: "cadastro"
+    paginaRenderizada: "cadastro",
+    idUsuarioRemover: ""
   }
 
   componentDidMount() {
@@ -76,6 +77,13 @@ export default class App extends React.Component {
 
   onClickPaginaDeUsuarios= () => {
     this.setState({paginaRenderizada: "cadastro"})
+  }
+
+  onClickRemoverUsuario = (id) => {
+    console.log("apagou id" , id)
+    this.setState({idUsuarioRemover: id})
+    this.excluirUsuario()
+    console.log("novo id", this.state.idUsuarioRemover)
   }
 
   paginaRenderizada = () => {
@@ -124,7 +132,7 @@ export default class App extends React.Component {
           return (
             <UsuarioCadastrado>
               <li key={usuario.id}>{usuario.name}</li>
-              <button>Excluir</button>
+              <button onClick={() => this.onClickRemoverUsuario(usuario.id)}>Excluir</button>
             </UsuarioCadastrado>
           
           )
@@ -163,11 +171,23 @@ export default class App extends React.Component {
   excluirUsuario = () => {
     const header = {
       headers: {
-        Authorization: "franciso-aguiar-banu"
+        Authorization: "franciso-aguiar-banu",
+      }
+    }
+
+    const param = {
+      path: {
+        id: this.state.idUsuarioRemover
       }
     }
     axios
-      .delete()
+      .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/:id`, header,)
+      .then((resultado) => {
+        alert("Usuário excluído com sucesso!")
+        this.setState({idUsuarioRemover: ""})
+        this.pegarListaDeUsuarios()
+      })
+      .catch((resultado) => alert("Erro! Não foi possível ecluir o usuário!"))
   }
 
 
