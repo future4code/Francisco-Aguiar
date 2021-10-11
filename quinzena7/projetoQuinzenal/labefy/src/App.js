@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 
+import iconDelete from "./img/iconDelete.svg"
+import iconDetails from "./img/iconDetails.svg"
+
 
 const Headers = {
   headers: {
@@ -12,8 +15,8 @@ const Headers = {
 
 const ContainerPai = styled.div`
   text-align: center;
-  display: grid;
-  grid-row: 1fr 2fr 1fr;
+  /* display: grid; */
+  /* grid-row: 1fr 2fr 1fr; */
 `
 
 const Header = styled.header`
@@ -24,6 +27,9 @@ const Header = styled.header`
   align-items: center;
   padding-left: 90px;
   padding-right: 200px;
+  h1{
+    cursor: pointer;
+  }
 ` 
 
 const MenuOpcoes = styled.nav`
@@ -34,7 +40,14 @@ const MenuOpcoes = styled.nav`
   p{
     border: 1px solid black;
     width: 180px;
+    cursor: pointer;
     
+  }
+  p:hover{
+    background-color: gray;
+  }
+  p:active{
+    background-color: #F0831E ;
   }
 `
 
@@ -130,10 +143,45 @@ const PaginaCriarPlayList = styled.div`
 
 const PaginaPlayLists = styled.div`
   background-image: url("https://images.vexels.com/media/users/3/145464/isolated/lists/0842d1719ec663c3256b9f46c740bbed-onda-de-audio.png");
-  background-size: 70%;
-  background-position: bottom 328% center ;
+  background-size: 75%;
+  background-position: bottom 308% center ;
   background-color: #38FFA7;
-  height: 800px;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 50px;
+  gap: 10px;
+  
+`
+
+const ElementosLista = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  width: 500px;
+  height: 50px;
+  padding: 0 5px;
+  
+
+  
+  li{
+    list-style: none;
+    font-size: 25px;
+    padding-left: 20px;
+  }
+  .imagens{
+    display: flex;
+    img{
+      width: 30px;
+      cursor:pointer;
+      
+    }
+    
+  }
+
 `
 
 const Footer = styled.footer`
@@ -149,6 +197,7 @@ export class App extends React.Component {
   state = {
     inputNomePlayList: "",
     playlist: [],
+    paginaRenderizada: "inicial",
   }
   
   componentDidMount() {
@@ -157,6 +206,18 @@ export class App extends React.Component {
 
   onChangeInputNomePlayList = (e) => {
     this.setState ({inputNomePlayList: e.target.value})
+  }
+
+  onClickPaginaCriarPlayList = ()=> {
+    this.setState ({paginaRenderizada: "cadastro"})
+  }
+
+  onClickPaginaMinhasPlayList = () => {
+    this.setState ({paginaRenderizada: "playlists"})
+  }
+
+  onClickPaginaInicial = () => {
+    this.setState ({paginaRenderizada: "inicial"})
   }
 
   criarPlayList = () => {
@@ -187,12 +248,33 @@ export class App extends React.Component {
       .catch ((res) => console.log("erro!"))
   }
 
+  excluirPlayList = (id) => {
+    axios
+      .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${id}`, Headers)
+      .then((res) =>{
+        alert("Playlist removida com sucesso!")
+        this.pegarPlayList()
+      })
+  }
+
+  paginaRenderizada = () => {
+    switch (this.state.paginaRenderizada){
+      case "playlists":
+        return this.paginaPlayListsCadastradas()
+      case "cadastro":
+        return this.paginaCriarPlayList()
+      default:
+        return this.paginaInicial()
+    }
+      
+  }
+
   paginaInicial = () => {
     return(
       <PaginaInicial>
         <h1>Músicas que tocam a alma</h1>
         <p>Uma infinidade de sons para todos os gostos e estilos musicais.</p>
-        <button>Criar Minha PlayList</button>
+        <button onClick={this.onClickPaginaCriarPlayList}>Criar Minha PlayList</button>
       </PaginaInicial>
     )
   }
@@ -219,12 +301,18 @@ export class App extends React.Component {
     return(
       
       <PaginaPlayLists>
-        <h1>PlayList</h1>
+        <h1>🎵 Minhas PlayList</h1>
         {this.state.playlist.map((iten) => {
           return(
-            <div>
+            <ElementosLista>
               <li key={iten.id}>{iten.name}</li>
-            </div>
+              <div className="imagens">
+                <img src={iconDetails} alt="icone detlahes"/>
+                <img onClick= {()=> this.excluirPlayList(iten.id)} src= {iconDelete} alt= "icone delete"/>
+              </div>
+              
+              
+            </ElementosLista>
           )
           
         })}
@@ -237,18 +325,17 @@ export class App extends React.Component {
     return (
       <ContainerPai>
         <Header>
-          <h1> 🎶 LabeFy Music</h1>
+          <h1 onClick= {this.onClickPaginaInicial}> 🎶 LabeFy Music</h1>
           <MenuOpcoes>
-            <p> Minhas PlayList</p>
+            <p onClick= {this.onClickPaginaMinhasPlayList}> Minhas PlayList</p>
+            <p onClick= {this.onClickPaginaCriarPlayList} >Criar PlayList</p>
             
           </MenuOpcoes>
           
         </Header>
         <main>
           
-          {this.paginaPlayListsCadastradas()}
-          
-          
+          {this.paginaRenderizada()}
           
         </main>
 
