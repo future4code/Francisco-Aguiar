@@ -1,5 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import axios from "axios";
+
+
+const Headers = {
+  headers: {
+    Authorization: "francisco-aguiar-banu"
+  }
+}
 
 
 const ContainerPai = styled.div`
@@ -130,6 +138,28 @@ const Footer = styled.footer`
 `
 
 export class App extends React.Component {
+  state = {
+    inputNomePlayList: "",
+  }
+
+  onChangeInputNomePlayList = (e) => {
+    this.setState ({inputNomePlayList: e.target.value})
+  }
+
+  criarPlayList = () => {
+    const body = {
+      name: this.state.inputNomePlayList
+    }
+
+
+    axios
+      .post ("https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists", body, Headers)
+      .then((res) => {
+        alert("PlayList cadastrada com sucesso!")
+        this.setState({inputNomePlayList: ""})
+      })
+      .catch((res) => { alert("Erro! PlayList não cadastrada!")})
+  }
 
   paginaInicial = () => {
     return(
@@ -148,9 +178,12 @@ export class App extends React.Component {
             <h3>Criar Nova PlayList</h3>
             <div className= "nomePlaylist">
               <p>Nome da PlayList:</p>
-              <input></input>
+              <input
+                placeholder= "Nome da PlayList"
+                value= {this.state.inputNomePlayList}
+                onChange= {this.onChangeInputNomePlayList}/>
             </div>
-            <button>Criar PlayList</button>
+            <button onClick= {this.criarPlayList}>Criar PlayList</button>
           </div>
       </PaginaCriarPlayList>
     )
