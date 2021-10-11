@@ -4,6 +4,7 @@ import axios from "axios";
 
 import iconDelete from "./img/iconDelete.svg"
 import iconDetails from "./img/iconDetails.svg"
+import iconAdd from "./img/iconAdd.svg"
 
 
 const Headers = {
@@ -314,6 +315,7 @@ export class App extends React.Component {
             <ElementosLista>
               <li key={iten.id}>{iten.name}</li>
               <div className="imagens">
+                <img src={iconAdd} alt="icone adicionar"/>
                 <img src={iconDetails} alt="icone detlahes"/>
                 <img onClick= {()=> this.excluirPlayList(iten.id)} src= {iconDelete} alt= "icone delete"/>
               </div>
