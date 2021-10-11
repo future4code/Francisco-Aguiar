@@ -86,6 +86,9 @@ const PaginaInicial = styled.div`
     padding:6px 10px;
     text-decoration:none
   };
+  button:hover{
+    background-color: #212A ;
+  }
 `
 const PaginaCriarPlayList = styled.div`
   background-image: url("https://images.vexels.com/media/users/3/145464/isolated/lists/0842d1719ec663c3256b9f46c740bbed-onda-de-audio.png");
@@ -136,6 +139,9 @@ const PaginaCriarPlayList = styled.div`
     padding:6px 10px;
     text-decoration:none
   };
+  button:hover{
+    background-color: #212A ;
+  }
 
 
   }
