@@ -65,6 +65,60 @@ const PaginaInicial = styled.div`
     text-decoration:none
   };
 `
+const PaginaCriarPlayList = styled.div`
+  background-image: url("https://images.vexels.com/media/users/3/145464/isolated/lists/0842d1719ec663c3256b9f46c740bbed-onda-de-audio.png");
+  background-size: 50%;
+  background-position: bottom 300% center ;
+  background-color: #38FFA7;
+  height: 560px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  .divPrincipal{
+    border: 1px outset black;
+    border-radius: 2px;
+    width: 400px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 10px;
+    
+
+    h3{
+      font-size: 30px;
+      padding-top: 40px;
+    }
+
+    .nomePlaylist{
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      padding-bottom: 30px;
+      p{
+        font-size: 20px;
+      }
+      
+    }
+    button {
+    border:1px solid #25692A;
+    border-radius:100px;
+    display:inline-block;
+    cursor:pointer;
+    /* font-family:Verdana; */
+    font-weight:bold;
+    font-size:15px;
+    padding:6px 10px;
+    text-decoration:none
+  };
+
+
+  }
+
+`
 
 const Footer = styled.footer`
   background-color: black ;
@@ -86,6 +140,21 @@ export class App extends React.Component {
       </PaginaInicial>
     )
   }
+
+  paginaCriarPlayList = () => {
+    return (
+      <PaginaCriarPlayList>
+          <div className= "divPrincipal">
+            <h3>Criar Nova PlayList</h3>
+            <div className= "nomePlaylist">
+              <p>Nome da PlayList:</p>
+              <input></input>
+            </div>
+            <button>Criar PlayList</button>
+          </div>
+      </PaginaCriarPlayList>
+    )
+  }
   render() {
     return (
       <ContainerPai>
@@ -98,7 +167,7 @@ export class App extends React.Component {
           
         </Header>
         <main>
-          {this.paginaInicial()}
+          {this.paginaCriarPlayList()}
           
         </main>
 
