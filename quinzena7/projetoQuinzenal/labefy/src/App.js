@@ -39,6 +39,7 @@ const MenuOpcoes = styled.nav`
   
   p{
     border: 1px solid black;
+    border-radius: 15px;
     width: 180px;
     cursor: pointer;
     
