@@ -206,6 +206,7 @@ export class App extends React.Component {
     inputNomePlayList: "",
     playlist: [],
     paginaRenderizada: "inicial",
+    detalhesPlayListEscolhida: [],
   }
   
   componentDidMount() {
