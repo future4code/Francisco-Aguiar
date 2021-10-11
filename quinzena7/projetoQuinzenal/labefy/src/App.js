@@ -128,6 +128,14 @@ const PaginaCriarPlayList = styled.div`
 
 `
 
+const PaginaPlayLists = styled.div`
+  background-image: url("https://images.vexels.com/media/users/3/145464/isolated/lists/0842d1719ec663c3256b9f46c740bbed-onda-de-audio.png");
+  background-size: 70%;
+  background-position: bottom 328% center ;
+  background-color: #38FFA7;
+  height: 800px;
+`
+
 const Footer = styled.footer`
   background-color: black ;
   color: white;
@@ -140,6 +148,11 @@ const Footer = styled.footer`
 export class App extends React.Component {
   state = {
     inputNomePlayList: "",
+    playlist: [],
+  }
+  
+  componentDidMount() {
+    this.pegarPlayList()
   }
 
   onChangeInputNomePlayList = (e) => {
@@ -157,8 +170,21 @@ export class App extends React.Component {
       .then((res) => {
         alert("PlayList cadastrada com sucesso!")
         this.setState({inputNomePlayList: ""})
+        this.pegarPlayList()
       })
       .catch((res) => { alert("Erro! PlayList não cadastrada!")})
+  }
+
+  pegarPlayList = () => {
+    axios
+      .get("https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists", Headers)
+      .then ((res) => {
+        
+        console.log ("resultado", res.data.result.list)
+        this.setState({playlist: res.data.result.list})
+        console.log("playlist", this.state.playlist)
+      })
+      .catch ((res) => console.log("erro!"))
   }
 
   paginaInicial = () => {
@@ -188,7 +214,26 @@ export class App extends React.Component {
       </PaginaCriarPlayList>
     )
   }
+
+  paginaPlayListsCadastradas = () => {
+    return(
+      
+      <PaginaPlayLists>
+        <h1>PlayList</h1>
+        {this.state.playlist.map((iten) => {
+          return(
+            <div>
+              <li key={iten.id}>{iten.name}</li>
+            </div>
+          )
+          
+        })}
+        
+      </PaginaPlayLists>
+    )
+  }
   render() {
+ 
     return (
       <ContainerPai>
         <Header>
@@ -200,13 +245,17 @@ export class App extends React.Component {
           
         </Header>
         <main>
-          {this.paginaCriarPlayList()}
+          
+          {this.paginaPlayListsCadastradas()}
+          
+          
           
         </main>
 
         <Footer>
           © 2021 LabeFy Music
         </Footer>
+        
         
       </ContainerPai>
     );
