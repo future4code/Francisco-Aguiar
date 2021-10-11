@@ -66,6 +66,15 @@ const PaginaInicial = styled.div`
   };
 `
 
+const Footer = styled.footer`
+  background-color: black ;
+  color: white;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 export class App extends React.Component {
 
   paginaInicial = () => {
@@ -83,7 +92,6 @@ export class App extends React.Component {
         <Header>
           <h1> 🎶 LabeFy Music</h1>
           <MenuOpcoes>
-            <p> Criar PlayList</p>
             <p> Minhas PlayList</p>
             
           </MenuOpcoes>
@@ -94,9 +102,9 @@ export class App extends React.Component {
           
         </main>
 
-        <footer>
-          footer
-        </footer>
+        <Footer>
+          © 2021 LabeFy Music
+        </Footer>
         
       </ContainerPai>
     );
