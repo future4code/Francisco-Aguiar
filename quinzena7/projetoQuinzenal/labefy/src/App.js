@@ -91,6 +91,18 @@ const PaginaInicial = styled.div`
     background-color: #212A ;
   }
 `
+const PaginaCriarMusica = styled.div`
+  background-image: url("https://images.vexels.com/media/users/3/145464/isolated/lists/0842d1719ec663c3256b9f46c740bbed-onda-de-audio.png");
+  background-size: 50%;
+  background-position: bottom 300% center ;
+  background-color: #38FFA7;
+  height: 560px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+`
+
 const PaginaCriarPlayList = styled.div`
   background-image: url("https://images.vexels.com/media/users/3/145464/isolated/lists/0842d1719ec663c3256b9f46c740bbed-onda-de-audio.png");
   background-size: 50%;
@@ -237,7 +249,8 @@ export class App extends React.Component {
     playlist: [],
     paginaRenderizada: "inicial",
     detalhesPlayListEscolhida: [],
-    pegaNomeDaPlayListClicada: []
+    pegaNomeDaPlayListClicada: [],
+    idDaPlayListQueAMusicaVaiSerAdicionada: ""
   }
   
   componentDidMount() {
@@ -258,6 +271,10 @@ export class App extends React.Component {
 
   onClickPaginaInicial = () => {
     this.setState ({paginaRenderizada: "inicial"})
+  }
+
+  onClickAddMusica = (id) => {
+    this.setState({paginaRenderizada: "addMusica", idDaPlayListQueAMusicaVaiSerAdicionada: id})
   }
 
   criarPlayList = () => {
@@ -321,6 +338,8 @@ export class App extends React.Component {
 
   paginaRenderizada = () => {
     switch (this.state.paginaRenderizada){
+      case "addMusica":
+        return this.paginaAdicionarMusica()
       case "detalhes":
         return this.paginaDetalhesPlayList()
       case "playlists":
@@ -361,6 +380,28 @@ export class App extends React.Component {
     )
   }
 
+  paginaAdicionarMusica = () => {
+    return (
+      <PaginaCriarMusica>
+        <div>
+          <h3>Adicionar Música</h3>
+          <div>
+            <p>Nome da Música</p>
+            <input/>
+          </div>
+          <div>
+            <p>Nome do Artista/Banda</p>
+            <input/>
+          </div>
+          <div>
+            <p>Link da Música</p>
+            <input/>
+          </div>
+        </div>
+      </PaginaCriarMusica>
+    )
+  }
+
   paginaPlayListsCadastradas = () => {
     return(
       
@@ -371,7 +412,7 @@ export class App extends React.Component {
             <ElementosLista>
               <li key={iten.id}>{iten.name}</li>
               <div className="imagens">
-                <img src={iconAdd} alt="icone adicionar"/>
+                <img onClick= {()=> this.onClickAddMusica(iten.id)} src={iconAdd} alt="icone adicionar"/>
                 <img onClick= {()=> this.detalhesPlayList(iten.id)} src={iconDetails} alt="icone detlahes"/>
                 <img onClick= {()=> this.excluirPlayList(iten.id)} src= {iconDelete} alt= "icone delete"/>
               </div>
@@ -420,6 +461,7 @@ export class App extends React.Component {
         <main>
           
           {this.paginaRenderizada()}
+          {this.paginaAdicionarMusica()}
           
           
         </main>
