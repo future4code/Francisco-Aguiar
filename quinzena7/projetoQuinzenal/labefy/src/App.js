@@ -191,6 +191,35 @@ const ElementosLista = styled.div`
   }
 
 `
+const PlayListDetalhes = styled.div`
+  background-image: url("https://images.vexels.com/media/users/3/145464/isolated/lists/0842d1719ec663c3256b9f46c740bbed-onda-de-audio.png");
+  background-size: 75%;
+  background-position: bottom 308% center ;
+  background-color: #38FFA7;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 50px;
+  gap: 10px;
+  
+`
+
+const Tracks = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  width: 500px;
+  height: 50px;
+  padding: 0 5px;
+
+  .musica{
+    font-size: 25px;
+    padding-left: 20px;
+  }
+`
 
 const Footer = styled.footer`
   background-color: black ;
@@ -201,12 +230,14 @@ const Footer = styled.footer`
   align-items: center;
 `
 
+
 export class App extends React.Component {
   state = {
     inputNomePlayList: "",
     playlist: [],
     paginaRenderizada: "inicial",
     detalhesPlayListEscolhida: [],
+    pegaNomeDaPlayListClicada: []
   }
   
   componentDidMount() {
@@ -266,8 +297,32 @@ export class App extends React.Component {
       })
   }
 
+  detalhesPlayList = (id) => {
+    const nomePlayListClicada = this.state.playlist.filter((iten) =>{
+      if(iten.id === id) {
+        return iten
+      }
+    }).map((iten)=>{return iten.name})
+
+    console.log ("Nome", nomePlayListClicada)
+    axios
+      .get(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${id}/tracks`, Headers)
+      .then((res) => {
+        console.log("id", id)
+        console.log("playlistEscolhida", res.data.result.tracks)
+        this.setState({
+          detalhesPlayListEscolhida: res.data.result.tracks, 
+          pegaNomeDaPlayListClicada: nomePlayListClicada, 
+          paginaRenderizada: "detalhes" 
+        })
+      })
+      .catch((res)=> console.log("erro!"))
+  }
+
   paginaRenderizada = () => {
     switch (this.state.paginaRenderizada){
+      case "detalhes":
+        return this.paginaDetalhesPlayList()
       case "playlists":
         return this.paginaPlayListsCadastradas()
       case "cadastro":
@@ -317,7 +372,7 @@ export class App extends React.Component {
               <li key={iten.id}>{iten.name}</li>
               <div className="imagens">
                 <img src={iconAdd} alt="icone adicionar"/>
-                <img src={iconDetails} alt="icone detlahes"/>
+                <img onClick= {()=> this.detalhesPlayList(iten.id)} src={iconDetails} alt="icone detlahes"/>
                 <img onClick= {()=> this.excluirPlayList(iten.id)} src= {iconDelete} alt= "icone delete"/>
               </div>
               
@@ -330,6 +385,25 @@ export class App extends React.Component {
       </PaginaPlayLists>
     )
   }
+
+  paginaDetalhesPlayList = () => {
+    return(
+      <PlayListDetalhes>
+        <h1>🎵 {this.state.pegaNomeDaPlayListClicada.map((res)=> {return res})}</h1>
+        {this.state.detalhesPlayListEscolhida.map((iten)=>{
+          return(
+          
+            <Tracks>
+              <p className= "musica" key={iten.id}>🔊 {iten.name}</p>
+              <p className= "artista">{iten.artist}</p>
+
+            </Tracks>
+        )})}
+
+      </PlayListDetalhes>
+    )
+  }
+
   render() {
  
     return (
@@ -346,6 +420,7 @@ export class App extends React.Component {
         <main>
           
           {this.paginaRenderizada()}
+          
           
         </main>
 
