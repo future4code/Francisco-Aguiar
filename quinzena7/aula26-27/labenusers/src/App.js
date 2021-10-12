@@ -157,10 +157,26 @@ export default class App extends React.Component {
               value= {this.state.inputEmail}
               onChange= {this.onChangeEmail}/>
           </div>
-          <button>Salvar</button>
+          <button onClick={this.editarUsuario}>Salvar</button>
           <button onClick={this.onClickPaginaEditarUsuario}>Cancelar</button>
       </div>
     )
+  }
+
+  editarUsuario= () => {
+    const body= {
+      name: this.state.inputNome,
+      email: this.state.inputEmail
+    }
+
+    axios
+      .put(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${this.state.detalhesUsuario.id}`, body, headers)
+      .then((res) => {
+        alert("Usuário editado com sucesso!")
+        this.setState({paginaEditar: !this.state.paginaEditar})
+        this.pegarDetalhesUsuario(this.state.detalhesUsuario.id)
+      })
+      .catch((err)=>{console.log("Erro! Não foi possível editar usuário!")})
   }
 
 
@@ -198,6 +214,7 @@ export default class App extends React.Component {
       .then((resultado) => {
         console.log(resultado.data)
         this.setState({usuarios: resultado.data})
+        this.pegarListaDeUsuarios()
       })
       .catch((erro) => console.log(erro))
   }
