@@ -7,7 +7,9 @@ import {PaginaDeUsuarios} from './styled.js'
 import {PaginaDeCadastro} from './styled.js'
 import {FichaCadastro} from './styled.js'
 import {UsuarioCadastrado} from './styled.js'
-
+import {FicaEditarUsuario} from './styled.js'
+import {ContainerPagEditar} from './styled.js'
+import {ContainerPagDetalhes} from './styled.js'
 
 
 const headers = {
@@ -118,31 +120,32 @@ export default class App extends React.Component {
   paginaDetalhesUsuario = () => {
     if(this.state.paginaEditar === false) {
       return(
-        <div>
+        <ContainerPagDetalhes>
           <h3>Usuário {this.state.detalhesUsuario.name}</h3>
           <p>Nome: {this.state.detalhesUsuario.name}</p>
           <p>Email: {this.state.detalhesUsuario.email}</p>
           <button onClick={() => this.excluirUsuario(this.state.detalhesUsuario.id)}>Deletar</button>
           <button onClick={this.onClickPaginaDeCadastro}>Voltar</button>
           <button onClick={this.onClickPaginaEditarUsuario}>Editar</button>
-        </div>
+        </ContainerPagDetalhes>
       )
     } else{
       return(
-        <div>
+        <ContainerPagEditar>
             <h3>Usuário {this.state.detalhesUsuario.name}</h3>
             <p>Nome: {this.state.detalhesUsuario.name}</p>
             <p>Email: {this.state.detalhesUsuario.email}</p>
 
             {this.paginaEditarUsuario()}
-        </div>
+        </ContainerPagEditar>
       )}
     
   }
 
   paginaEditarUsuario = () => {
     return(
-      <div>
+      <FicaEditarUsuario>
+        <h3>Insira os novos dados!</h3>
         <div>
             <p>Novo Nome:</p>
             <input
@@ -159,7 +162,7 @@ export default class App extends React.Component {
           </div>
           <button onClick={this.editarUsuario}>Salvar</button>
           <button onClick={this.onClickPaginaEditarUsuario}>Cancelar</button>
-      </div>
+      </FicaEditarUsuario>
     )
   }
 
