@@ -162,9 +162,10 @@ export default class App extends React.Component {
   }
 
   excluirUsuario = (id) => {
-
     console.log ("id:", id)
-    axios
+
+    if(window.confirm(`Deseja excluir o usuário?`)){
+      axios
       .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, headers)
       .then((resultado) => {
         alert("Usuário excluído com sucesso!")
@@ -172,6 +173,18 @@ export default class App extends React.Component {
         this.pegarListaDeUsuarios()
       })
       .catch((resultado) => alert("Erro! Não foi possível ecluir o usuário!"))
+
+    }
+
+    
+    // axios
+    //   .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, headers)
+    //   .then((resultado) => {
+    //     alert("Usuário excluído com sucesso!")
+    //     this.setState({idUsuarioRemover: ""})
+    //     this.pegarListaDeUsuarios()
+    //   })
+    //   .catch((resultado) => alert("Erro! Não foi possível ecluir o usuário!"))
   }
 
 
