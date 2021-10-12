@@ -50,11 +50,11 @@ export default class App extends React.Component {
   }
 
   onClickPaginaDeCadastro = () =>{
-    this.setState({paginaRenderizada:"usuarios"})
+    this.setState({paginaRenderizada:"usuarios", inputNome:"", inputEmail:""})
   }
 
   onClickPaginaDeUsuarios= () => {
-    this.setState({paginaRenderizada: "cadastro"})
+    this.setState({paginaRenderizada: "cadastro", inputNome:"", inputEmail:""})
   }
 
   onClickPaginaEditarUsuario= () => {
@@ -135,7 +135,7 @@ export default class App extends React.Component {
       return(
         <PaginaDeUsuarios>
           <button onClick={this.onClickPaginaDeUsuarios}>Página de Cadastro</button>
-          <h3>Lista de usuários cadastrados com esse nome</h3>
+          <h3>Lista de usuários cadastrados com o nome buscado</h3>
           <button onClick={this.onClickVoltarDaBusca}>Voltar</button>
 
           {this.state.usuarioBuscado.map((usuario) =>{
@@ -284,7 +284,7 @@ export default class App extends React.Component {
       .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, headers)
       .then((resultado) => {
         alert("Usuário excluído com sucesso!")
-        this.setState({idUsuarioRemover: "",paginaRenderizada: "usuarios"})
+        this.setState({idUsuarioRemover: "",paginaRenderizada: "usuarios", buscarUsuario: false, inputNome: ""})
         this.pegarListaDeUsuarios()
       })
       .catch((resultado) => alert("Erro! Não foi possível ecluir o usuário!"))
