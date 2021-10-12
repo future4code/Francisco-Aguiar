@@ -5,6 +5,7 @@ import axios from "axios";
 import iconDelete from "./img/iconDelete.svg"
 import iconDetails from "./img/iconDetails.svg"
 import iconAdd from "./img/iconAdd.svg"
+import iconPlay from "./img/iconPlay.svg"
 
 
 const Headers = {
@@ -273,6 +274,13 @@ const Tracks = styled.div`
     font-size: 25px;
     padding-left: 20px;
   }
+  div{
+    display: flex;
+    img{
+      width: 30px;
+      cursor:pointer;
+    }
+  }
 `
 
 const Footer = styled.footer`
@@ -301,6 +309,7 @@ export class App extends React.Component {
   
   componentDidMount() {
     this.pegarPlayList()
+    this.detalhesPlayList()  
   }
 
   onChangeInputNomePlayList = (e) => {
@@ -344,6 +353,16 @@ export class App extends React.Component {
   })
   }
 
+  onClickRemoverMusica = (id) => {
+    axios
+      .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.state.idDaPlayListQueAMusicaVaiSerAdicionada}/tracks/${id}`, Headers)
+      .then((res)=>{
+        alert("Música removida com sucesso! Atualize a página para salvar as alterações!")
+        this.detalhesPlayList()
+      })
+      .catch((res)=> {console.log("erro!")})
+  }
+
   criarPlayList = () => {
     const body = {
       name: this.state.inputNomePlayList
@@ -379,6 +398,7 @@ export class App extends React.Component {
         alert("Playlist removida com sucesso!")
         this.pegarPlayList()
       })
+      .catch((res)=>{console.log("erro!")})
   }
 
   adicionarMusica = () => {
@@ -416,7 +436,8 @@ export class App extends React.Component {
         this.setState({
           detalhesPlayListEscolhida: res.data.result.tracks, 
           pegaNomeDaPlayListClicada: nomePlayListClicada, 
-          paginaRenderizada: "detalhes" 
+          paginaRenderizada: "detalhes",
+          idDaPlayListQueAMusicaVaiSerAdicionada: id 
         })
       })
       .catch((res)=> console.log("erro!"))
@@ -533,6 +554,12 @@ export class App extends React.Component {
             <Tracks>
               <p className= "musica" key={iten.id}>🔊 {iten.name}</p>
               <p className= "artista">{iten.artist}</p>
+              <div>
+                <img src={iconPlay} alt="ícone play"/>
+                <img onClick={()=>this.onClickRemoverMusica(iten.id)} src= {iconDelete} alt="ícone delete"/>
+                
+              </div>
+              
 
             </Tracks>
         )})}
