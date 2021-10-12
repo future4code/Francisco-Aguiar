@@ -26,7 +26,9 @@ export default class App extends React.Component {
     paginaRenderizada: "cadastro",
     idUsuarioRemover: "",
     detalhesUsuario: [],
-    paginaEditar: false
+    paginaEditar: false,
+    buscarUsuario: false,
+    usuarioBuscado: []
   }
 
   componentDidMount() {
@@ -41,6 +43,10 @@ export default class App extends React.Component {
 
   onChangeEmail= (e) => {
     this.setState({inputEmail: e.target.value})
+  }
+
+  onClickVoltarDaBusca = () => {
+    this.setState({buscarUsuario: !this.state.buscarUsuario, inputNome:""})
   }
 
   onClickPaginaDeCadastro = () =>{
@@ -94,27 +100,62 @@ export default class App extends React.Component {
   }
 
   paginaListaDeUsuarios = () => {
-    return (
-      <PaginaDeUsuarios>
-        <button onClick={this.onClickPaginaDeUsuarios}>Página de Cadastro</button>
-        <h3>Lista de usuários cadastrados</h3>
-        
-        {this.state.usuarios.map((usuario) =>{
-          return (
-            <UsuarioCadastrado>
-              <li key={usuario.id}>{usuario.name}</li>
-              <div>
-                <button onClick= {()=> this.pegarDetalhesUsuario(usuario.id)}>Detalhes</button>
-                <button onClick={() => this.excluirUsuario(usuario.id)}>Excluir</button>
-              </div>
-              
-              
-            </UsuarioCadastrado>
+    if(this.state.buscarUsuario === false){
+      return (
+        <PaginaDeUsuarios>
+          <button onClick={this.onClickPaginaDeUsuarios}>Página de Cadastro</button>
+          <h3>Lista de usuários cadastrados</h3>
+          <div>
+            <input
+              placeholder="Buscar nome"
+              value= {this.state.inputNome}
+              onChange= {this.onChangeNome}
+            />
+            <button onClick={this.buscarUsuario}>Buscar</button>
+          </div>
+
           
-          )
-        })}
-      </PaginaDeUsuarios>
-    )
+          {this.state.usuarios.map((usuario) =>{
+            return (
+              <UsuarioCadastrado>
+                <li key={usuario.id}>{usuario.name}</li>
+                <div>
+                  <button onClick= {()=> this.pegarDetalhesUsuario(usuario.id)}>Detalhes</button>
+                  <button onClick={() => this.excluirUsuario(usuario.id)}>Excluir</button>
+                </div>
+                
+                
+              </UsuarioCadastrado>
+            
+            )
+          })}
+        </PaginaDeUsuarios>
+      )
+    } else{
+      return(
+        <PaginaDeUsuarios>
+          <button onClick={this.onClickPaginaDeUsuarios}>Página de Cadastro</button>
+          <h3>Lista de usuários cadastrados com esse nome</h3>
+          <button onClick={this.onClickVoltarDaBusca}>Voltar</button>
+
+          {this.state.usuarioBuscado.map((usuario) =>{
+            return (
+              <UsuarioCadastrado>
+                <li key={usuario.id}>{usuario.name}</li>
+                <div>
+                  <button onClick= {()=> this.pegarDetalhesUsuario(usuario.id)}>Detalhes</button>
+                  <button onClick={() => this.excluirUsuario(usuario.id)}>Excluir</button>
+                </div>
+                
+                
+              </UsuarioCadastrado>
+            
+            )
+          })}
+
+        </PaginaDeUsuarios>  
+      )
+    }
   }
 
   paginaDetalhesUsuario = () => {
@@ -164,6 +205,16 @@ export default class App extends React.Component {
           <button onClick={this.onClickPaginaEditarUsuario}>Cancelar</button>
       </FicaEditarUsuario>
     )
+  }
+
+  buscarUsuario = () =>{
+    axios
+      .get(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/search?name=${this.state.inputNome}`, headers)
+      .then((res)=>{
+        console.log("userBuscar",res.data)
+        this.setState({usuarioBuscado: res.data, buscarUsuario: !this.state.buscarUsuario})
+      })
+      .catch((err)=>{alert("Usuário não encontrado!")})
   }
 
   editarUsuario= () => {
@@ -219,7 +270,6 @@ export default class App extends React.Component {
     axios
       .get("https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users", headers)
       .then((resultado) => {
-        console.log(resultado.data)
         this.setState({usuarios: resultado.data})
         this.pegarListaDeUsuarios()
       })
