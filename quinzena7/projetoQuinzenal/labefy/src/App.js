@@ -270,9 +270,15 @@ const Tracks = styled.div`
   height: 50px;
   padding: 0 5px;
 
+
+
   .musica{
     font-size: 25px;
     padding-left: 20px;
+  }
+  .artista{
+    align-self: center;
+    padding-top: 10px;
   }
   div{
     display: flex;
