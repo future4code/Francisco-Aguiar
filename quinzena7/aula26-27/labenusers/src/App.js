@@ -23,7 +23,8 @@ export default class App extends React.Component {
     usuarios: [],
     paginaRenderizada: "cadastro",
     idUsuarioRemover: "",
-    detalhesUsuario: []
+    detalhesUsuario: [],
+    paginaEditar: false
   }
 
   componentDidMount() {
@@ -46,6 +47,10 @@ export default class App extends React.Component {
 
   onClickPaginaDeUsuarios= () => {
     this.setState({paginaRenderizada: "cadastro"})
+  }
+
+  onClickPaginaEditarUsuario= () => {
+    this.setState({paginaEditar: !this.state.paginaEditar})
   }
 
   paginaRenderizada = () => {
@@ -111,18 +116,53 @@ export default class App extends React.Component {
   }
 
   paginaDetalhesUsuario = () => {
+    if(this.state.paginaEditar === false) {
+      return(
+        <div>
+          <h3>Usuário {this.state.detalhesUsuario.name}</h3>
+          <p>Nome: {this.state.detalhesUsuario.name}</p>
+          <p>Email: {this.state.detalhesUsuario.email}</p>
+          <button onClick={() => this.excluirUsuario(this.state.detalhesUsuario.id)}>Deletar</button>
+          <button onClick={this.onClickPaginaDeCadastro}>Voltar</button>
+          <button onClick={this.onClickPaginaEditarUsuario}>Editar</button>
+        </div>
+      )
+    } else{
+      return(
+        <div>
+            <h3>Usuário {this.state.detalhesUsuario.name}</h3>
+            <p>Nome: {this.state.detalhesUsuario.name}</p>
+            <p>Email: {this.state.detalhesUsuario.email}</p>
+
+            {this.paginaEditarUsuario()}
+        </div>
+      )}
+    
+  }
+
+  paginaEditarUsuario = () => {
     return(
       <div>
-        <h3>Usuário {this.state.detalhesUsuario.name}</h3>
-        <p>Nome: {this.state.detalhesUsuario.name}</p>
-        <p>Email: {this.state.detalhesUsuario.email}</p>
-        <button onClick={() => this.excluirUsuario(this.state.detalhesUsuario.id)}>Deletar</button>
-        <button onClick={this.onClickPaginaDeCadastro}>Voltar</button>
-
-       
+        <div>
+            <p>Novo Nome:</p>
+            <input
+              placeholder="Digite o novo nome"
+              value= {this.state.inputNome}
+              onChange= {this.onChangeNome}/>
+          </div>
+          <div>
+            <p>Novo Email:</p>
+            <input
+              placeholder="Digite o novo email"
+              value= {this.state.inputEmail}
+              onChange= {this.onChangeEmail}/>
+          </div>
+          <button>Salvar</button>
+          <button onClick={this.onClickPaginaEditarUsuario}>Cancelar</button>
       </div>
     )
   }
+
 
   pegarDetalhesUsuario = (id) => {
     axios
@@ -176,16 +216,6 @@ export default class App extends React.Component {
       .catch((resultado) => alert("Erro! Não foi possível ecluir o usuário!"))
 
     }
-
-    
-    // axios
-    //   .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, headers)
-    //   .then((resultado) => {
-    //     alert("Usuário excluído com sucesso!")
-    //     this.setState({idUsuarioRemover: ""})
-    //     this.pegarListaDeUsuarios()
-    //   })
-    //   .catch((resultado) => alert("Erro! Não foi possível ecluir o usuário!"))
   }
 
 
