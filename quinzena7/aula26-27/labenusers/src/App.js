@@ -172,7 +172,8 @@ export default class App extends React.Component {
       email: this.state.inputEmail
     }
 
-    axios
+    if(window.confirm(`Deseja editar o usuário?`)){
+      axios
       .put(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${this.state.detalhesUsuario.id}`, body, headers)
       .then((res) => {
         alert("Usuário editado com sucesso!")
@@ -180,6 +181,9 @@ export default class App extends React.Component {
         this.pegarDetalhesUsuario(this.state.detalhesUsuario.id)
       })
       .catch((err)=>{console.log("Erro! Não foi possível editar usuário!")})
+    }
+
+    
   }
 
 
