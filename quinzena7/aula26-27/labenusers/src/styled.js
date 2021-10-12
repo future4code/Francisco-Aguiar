@@ -36,6 +36,11 @@ export const UsuarioCadastrado= styled.div`
   width: 300px;
   height: 50px;
   padding: 10px;
+
+  div{
+    display: flex;
+    gap: 3px;
+  }
   
 `
 

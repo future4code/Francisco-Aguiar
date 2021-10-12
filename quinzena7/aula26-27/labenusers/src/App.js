@@ -22,7 +22,8 @@ export default class App extends React.Component {
     inputEmail: "",
     usuarios: [],
     paginaRenderizada: "cadastro",
-    idUsuarioRemover: ""
+    idUsuarioRemover: "",
+    detalhesUsuario: []
   }
 
   componentDidMount() {
@@ -49,6 +50,8 @@ export default class App extends React.Component {
 
   paginaRenderizada = () => {
     switch (this.state.paginaRenderizada){
+      case "detalhes":
+        return this.paginaDetalhesUsuario()
       case 'usuarios':
         return this.paginaListaDeUsuarios()
       default:
@@ -93,13 +96,41 @@ export default class App extends React.Component {
           return (
             <UsuarioCadastrado>
               <li key={usuario.id}>{usuario.name}</li>
-              <button onClick={() => this.excluirUsuario(usuario.id)}>Excluir</button>
+              <div>
+                <button onClick= {()=> this.pegarDetalhesUsuario(usuario.id)}>Detalhes</button>
+                <button onClick={() => this.excluirUsuario(usuario.id)}>Excluir</button>
+              </div>
+              
+              
             </UsuarioCadastrado>
           
           )
         })}
       </PaginaDeUsuarios>
     )
+  }
+
+  paginaDetalhesUsuario = () => {
+    return(
+      <div>
+        <h3>Usuário {this.state.detalhesUsuario.name}</h3>
+        <p>Nome: {this.state.detalhesUsuario.name}</p>
+        <p>Email: {this.state.detalhesUsuario.email}</p>
+        <button onClick={this.onClickPaginaDeCadastro}>Voltar</button>
+       
+      </div>
+    )
+  }
+
+  pegarDetalhesUsuario = (id) => {
+    axios
+      .get(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, headers)
+      .then((res)=>{
+        console.log('res', res.data)
+        this.setState({detalhesUsuario: res.data, paginaRenderizada: "detalhes"})
+        console.log("state", this.state.detalhesUsuario)
+      })
+      .catch((err)=>{console.log("Erro!")})
   }
 
   cadastrarUsuario = () => {
