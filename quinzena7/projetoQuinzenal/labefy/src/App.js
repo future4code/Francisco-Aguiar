@@ -101,6 +101,48 @@ const PaginaCriarMusica = styled.div`
   justify-content: center;
   align-items: center;
 
+  .divPrincipal{
+    border: 1px outset black;
+    border-radius: 2px;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 10px;
+
+    h3{
+      font-size: 30px;
+      padding-top: 40px;
+    }
+
+    .infoFaixa{
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+      padding-bottom: 10px;
+
+      p{
+        font-size: 20px;
+      }
+    }
+    button {
+    border:1px solid #25692A;
+    border-radius:100px;
+    display:inline-block;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:15px;
+    padding:6px 10px;
+    text-decoration:none
+  };
+    button:hover{
+      background-color: #212A ;
+  }
+  }
+  
 `
 
 const PaginaCriarPlayList = styled.div`
@@ -250,7 +292,11 @@ export class App extends React.Component {
     paginaRenderizada: "inicial",
     detalhesPlayListEscolhida: [],
     pegaNomeDaPlayListClicada: [],
-    idDaPlayListQueAMusicaVaiSerAdicionada: ""
+    idDaPlayListQueAMusicaVaiSerAdicionada: "",
+    inputNomeMusica: "",
+    inputNomeArtista: "",
+    inputUrlMusica: "",
+    nomeDaPlayListClicadaParaAddMusica: []
   }
   
   componentDidMount() {
@@ -259,6 +305,18 @@ export class App extends React.Component {
 
   onChangeInputNomePlayList = (e) => {
     this.setState ({inputNomePlayList: e.target.value})
+  }
+
+  onChangeInputNomeMusica = (e) => {
+    this.setState ({inputNomeMusica: e.target.value})
+  }
+
+  onChangeInputNomeArtista = (e) => {
+    this.setState ({inputNomeArtista: e.target.value})
+  }
+
+  onChangeInputUrlMusica = (e) => {
+    this.setState ({inputUrlMusica: e.target.value})
   }
 
   onClickPaginaCriarPlayList = ()=> {
@@ -274,7 +332,16 @@ export class App extends React.Component {
   }
 
   onClickAddMusica = (id) => {
-    this.setState({paginaRenderizada: "addMusica", idDaPlayListQueAMusicaVaiSerAdicionada: id})
+    const pegaNomeDaPlayListClicada = this.state.playlist.filter((iten) =>{
+      if(iten.id === id) {
+        return iten
+      }
+    }).map((iten)=>{return iten.name})
+
+    this.setState({paginaRenderizada: "addMusica", 
+    idDaPlayListQueAMusicaVaiSerAdicionada: id, 
+    nomeDaPlayListClicadaParaAddMusica: pegaNomeDaPlayListClicada
+  })
   }
 
   criarPlayList = () => {
@@ -312,6 +379,25 @@ export class App extends React.Component {
         alert("Playlist removida com sucesso!")
         this.pegarPlayList()
       })
+  }
+
+  adicionarMusica = () => {
+    const body = {
+      name: this.state.inputNomeMusica, 
+      artist: this.state.inputNomeArtista,
+      url: this.state.inputUrlMusica
+  }
+    axios
+      .post(
+        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.state.idDaPlayListQueAMusicaVaiSerAdicionada}/tracks`,
+        body,
+        Headers
+      )
+      .then((res)=> {
+        alert("Música adicionada com sucesso!")
+        this.setState ({inputNomeArtista: "", inputNomeMusica:"", inputUrlMusica:""})
+      })
+      .catch((res)=> {console.log("erro!")})
   }
 
   detalhesPlayList = (id) => {
@@ -383,20 +469,30 @@ export class App extends React.Component {
   paginaAdicionarMusica = () => {
     return (
       <PaginaCriarMusica>
-        <div>
-          <h3>Adicionar Música</h3>
-          <div>
+        <div className="divPrincipal">
+          <h3>Adicionar Música à PlayList {this.state.nomeDaPlayListClicadaParaAddMusica.map((res)=>{return res})}</h3>
+          <div className="infoFaixa">
             <p>Nome da Música</p>
-            <input/>
+            <input
+              placeholder= "Nome da Música"
+              value= {this.state.inputNomeMusica}
+              onChange= {this.onChangeInputNomeMusica}/>
           </div>
-          <div>
+          <div className="infoFaixa">
             <p>Nome do Artista/Banda</p>
-            <input/>
+            <input
+              placeholder= "Nome do Artista/Banda"
+              value= {this.state.inputNomeArtista}
+              onChange= {this.onChangeInputNomeArtista}/>
           </div>
-          <div>
+          <div className="infoFaixa">
             <p>Link da Música</p>
-            <input/>
+            <input
+              placeholder= "Url"
+              value= {this.state.inputUrlMusica}
+              onChange= {this.onChangeInputUrlMusica}/>
           </div>
+          <button onClick= {this.adicionarMusica}>Adicionar Música</button>
         </div>
       </PaginaCriarMusica>
     )
@@ -461,7 +557,7 @@ export class App extends React.Component {
         <main>
           
           {this.paginaRenderizada()}
-          {this.paginaAdicionarMusica()}
+
           
           
         </main>
