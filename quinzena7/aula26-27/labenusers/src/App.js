@@ -116,7 +116,9 @@ export default class App extends React.Component {
         <h3>Usuário {this.state.detalhesUsuario.name}</h3>
         <p>Nome: {this.state.detalhesUsuario.name}</p>
         <p>Email: {this.state.detalhesUsuario.email}</p>
+        <button onClick={() => this.excluirUsuario(this.state.detalhesUsuario.id)}>Deletar</button>
         <button onClick={this.onClickPaginaDeCadastro}>Voltar</button>
+
        
       </div>
     )
@@ -168,7 +170,7 @@ export default class App extends React.Component {
       .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, headers)
       .then((resultado) => {
         alert("Usuário excluído com sucesso!")
-        this.setState({idUsuarioRemover: ""})
+        this.setState({idUsuarioRemover: "",paginaRenderizada: "usuarios"})
         this.pegarListaDeUsuarios()
       })
       .catch((resultado) => alert("Erro! Não foi possível ecluir o usuário!"))
