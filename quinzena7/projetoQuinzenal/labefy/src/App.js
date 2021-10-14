@@ -266,9 +266,10 @@ const Tracks = styled.div`
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
-  width: 500px;
-  height: 50px;
+  width: 900px;
+  height: 70px;
   padding: 0 5px;
+
 
 
 
