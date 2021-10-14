@@ -558,10 +558,10 @@ export class App extends React.Component {
           return(
           
             <Tracks>
+              <audio controls> <source src= {iten.url}/> </audio>
               <p className= "musica" key={iten.id}>🔊 {iten.name}</p>
               <p className= "artista">{iten.artist}</p>
               <div>
-                <img src={iconPlay} alt="ícone play"/>
                 <img onClick={()=>this.onClickRemoverMusica(iten.id)} src= {iconDelete} alt="ícone delete"/>
                 
               </div>
