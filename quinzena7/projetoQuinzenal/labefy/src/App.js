@@ -361,7 +361,8 @@ export class App extends React.Component {
   }
 
   onClickRemoverMusica = (id) => {
-    axios
+    if(window.confirm("Deseja excluir música?")){
+      axios
       .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.state.idDaPlayListQueAMusicaVaiSerAdicionada}/tracks/${id}`, Headers)
       .then((res)=>{
         alert("Música removida com sucesso! Atualize a página para salvar as alterações!")
@@ -369,6 +370,7 @@ export class App extends React.Component {
         this.pegarPlayList()
       })
       .catch((res)=> {console.log("erro!")})
+    }
   }
 
   criarPlayList = () => {
@@ -400,13 +402,15 @@ export class App extends React.Component {
   }
 
   excluirPlayList = (id) => {
-    axios
+    if(window.confirm("Deseja excluir playlist?")) {
+      axios
       .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${id}`, Headers)
       .then((res) =>{
         alert("Playlist removida com sucesso!")
         this.pegarPlayList()
       })
       .catch((res)=>{console.log("erro!")})
+    }
   }
 
   adicionarMusica = () => {
