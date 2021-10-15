@@ -366,6 +366,7 @@ export class App extends React.Component {
       .then((res)=>{
         alert("Música removida com sucesso! Atualize a página para salvar as alterações!")
         this.detalhesPlayList()
+        this.pegarPlayList()
       })
       .catch((res)=> {console.log("erro!")})
   }
@@ -559,7 +560,7 @@ export class App extends React.Component {
           return(
           
             <Tracks>
-              <audio controls> <source src= {iten.url}/> </audio>
+              <audio controls> <source src={iten.url}/></audio>              
               <p className= "musica" key={iten.id}>🔊 {iten.name}</p>
               <p className= "artista">{iten.artist}</p>
               <div>
