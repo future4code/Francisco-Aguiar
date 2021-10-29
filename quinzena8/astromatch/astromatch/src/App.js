@@ -9,10 +9,7 @@ import {ContainerPai} from './Components/Estilizacao/style'
 import {Cabecalho} from './Components/Estilizacao/style'
 import {Perfis} from './Components/Estilizacao/style'
 import {Botoes} from './Components/Estilizacao/style'
-
-
-
-
+import {Reset} from './Components/Estilizacao/style'
 
 
 
@@ -65,6 +62,10 @@ const App = () => {
 	    "choice": true
     }
 
+    if (!perfil.id) {
+      return
+    }
+
     axios
     .post("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/francisco-aguiar/choose-person", body, headers)
     .then((res) => {
@@ -75,7 +76,21 @@ const App = () => {
   }
 
   const onClickRejeitar = () => {
+    if (!perfil.id) {
+      return
+    }
     pegarPerfil()
+  }
+
+  const onClickReset = () => {
+    axios
+      .put("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/francisco-aguiar/clear")
+      .then((res)=>{
+        pegarMatchs()
+      })
+      .catch((err) => {
+        console.log("limp", err)
+      })
   }
 
   const paginaRenderizada = () =>{
@@ -115,38 +130,39 @@ const App = () => {
       </ContainerPai>
     )}
 
-    const paginaMatchs = () => {
-      return(
-        <ContainerPai>
-          <Cabecalho>
+  const paginaMatchs = () => {
+    return(
+      <ContainerPai>
+        <Cabecalho>
+        
+          <img onClick={onClickIconAdd} className="iconAdd" src= {iconAdd} alt="Ícone Adicionar"/>
+          <img className="logo" src= {logo} alt="Logo"/>
+          <img className="iconMatch" src= {iconMatch} alt="Ícone Matchs"/>
           
-            <img onClick={onClickIconAdd} className="iconAdd" src= {iconAdd} alt="Ícone Adicionar"/>
-            <img className="logo" src= {logo} alt="Logo"/>
-            <img className="iconMatch" src= {iconMatch} alt="Ícone Matchs"/>
-            
-          </Cabecalho>
+        </Cabecalho>
 
-          <div className="corpo">
-            {matchs.map((iten) =>{
-              return(
-                <div key={iten.id}>
-                  <img style={{width:"10px"}} src={iten.photo} alt="Foto usuario"/>
-                  <p>{iten.name}</p>
-                </div>
-              )
-            })}
+        <div className="corpo">
+          {matchs.map((iten) =>{
+            return(
+              <div className= "matches" key={iten.id}>
+                <img src={iten.photo} alt="Foto usuario"/>
+                <p>{iten.name}</p>
+              </div>
+            )
+          })}
 
-          </div>
+        </div>
 
 
 
-        </ContainerPai>
-      )
-    }
+      </ContainerPai>
+    )
+  }
 
   return (
     <div>
       {paginaRenderizada()}
+      <Reset onClick={onClickReset}>Resetar</Reset>
       
     </div>
   );

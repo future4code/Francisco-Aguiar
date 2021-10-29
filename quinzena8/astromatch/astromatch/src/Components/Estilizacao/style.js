@@ -17,6 +17,17 @@ export const ContainerPai = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+        
+        .matches{
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            img{
+                height: 60px;
+                width: 80px;
+                border-radius: 60px;
+            }
+        }
     }
    
 `
@@ -114,4 +125,9 @@ export const Botoes= styled.div`
         background-color: green;
         color: white;
     }
+`
+
+export const Reset = styled.button`
+    display: inline-block;
+    align-items: flex-start;
 `
