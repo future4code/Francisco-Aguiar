@@ -22,7 +22,7 @@ const ListTripsPage = () =>{
             <header>
                 <h2>Space Trips 🛸</h2>
                 <button onClick = {() => navigate(-1)}>Voltar</button>
-                <button>Increver-se</button>
+                <button onClick = {() => navigate("/applicationforme")}>Increver-se</button>
             </header>
             <main>
                 <h1>Viagens Disponíveis</h1>

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage/HomePage";
 import ListTripsPage from "../pages/ListTripsPage/ListTripsPage";
+import ApplicationFormPage from "../pages/ApplicationFormPage/ApplicationFormPage"
 
 
 const Router = () => {
@@ -12,6 +13,10 @@ const Router = () => {
 
             <Routes>
                 <Route path= "/listtrips" element= {<ListTripsPage/>} />
+            </Routes>
+
+            <Routes>
+                <Route path= "/applicationforme" element= {<ApplicationFormPage/>}/>
             </Routes>
         </BrowserRouter>
     )
