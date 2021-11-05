@@ -1,12 +1,13 @@
-import react from "react";
+import { useNavigate } from "react-router"
 
 const ListTripsPage = () =>{
+    const navigate = useNavigate()
 
     return(
         <>
             <header>
                 <h2>Space Trips 🛸</h2>
-                <button>Voltar</button>
+                <button onClick = {() => navigate(-1)}>Voltar</button>
                 <button>Increver-se</button>
             </header>
             <main>
