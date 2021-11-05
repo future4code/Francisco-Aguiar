@@ -1,15 +1,10 @@
-import react from "react";
+import Router from "./route/Router";
 
-import HomePage from "./pages/HomePage/HomePage"
-import ListTripsPage from "./pages/ListTripsPage/ListTripsPage"
-import ApplicationFormPage from "./pages/ApplicationFormPage/ApplicationFormPage"
-import LoginPage from "./pages/LoginPage/LoginPage"
-import AdminHomePage from "./pages/AdminHomePage/AdminHomePage"
 
 function App() {
   return (
     <div>
-      <AdminHomePage/>
+      <Router/>
     </div>
   );
 }
