@@ -27,10 +27,12 @@ const useRequestData = (method, url, body, header ) => {
                 .then((res) => {
                     setIsLoading(false)
                     setData(res.data)
+                    alert("ok")
                 })
                 .catch((err) => {
                     setIsLoading(false)
                     setError(err)
+                    alert("deu ruim-")
                 })
         }
         else if (method === "delete"){

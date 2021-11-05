@@ -44,7 +44,33 @@ const ApplicationFormPage = () => {
         setInputCountry(e.target.value)
     }
 
-    console.log("age", inputCountry)
+    const OnClickApplyToTrip = () => {
+        const [data, isLoading, error] = useRequestData(
+            "post", 
+            `${UrlBase}/trips/${inputTrip}/apply`, 
+            {
+                "name": inputName,
+                "age": inputAge,
+                "applicationText": inputApplicationText,
+                "profession": inputProfession,
+                "country": inputCountry
+            },
+            {
+                "Content-Type": "application/json"
+            })
+
+        console.log("apply", data)
+        
+        return(
+            <>
+                {isLoading && (alert("Enviando dados..."))}
+                {!isLoading && error && (alert("Ocorreu um erro"))}
+                {!isLoading && data && (alert("Deu Bom"))}
+            </>
+        )
+
+    }
+
     return(
         <>
             <header>
@@ -251,7 +277,7 @@ const ApplicationFormPage = () => {
 
                     <div>
                         <button onClick= {() => navigate("/listtrips")}>Ver Lista de Viagens</button>
-                        <button>Enviar</button>
+                        <button onClick={OnClickApplyToTrip}>Enviar</button>
                     </div> 
                 </form>
             </main>
