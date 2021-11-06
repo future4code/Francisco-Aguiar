@@ -5,28 +5,13 @@ const useRequestData = (method, url, body, header ) => {
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState("")
+    const [exec, setExec] = useState();
 
-    let exec
     useEffect(() => {
         
         if (method === "get"){
-            // setIsLoading(true)
-            // exec = () => {
-            //     axios
-            //         .get(url, header)
-            //         .then((res) => {
-            //             setIsLoading(false)
-            //             setData(res.data)
-            //         })
-            //         .catch((err) => {
-            //             setIsLoading(false)
-            //             setError(err)
-            //         })
-            // }
-
-
             setIsLoading(true)
-            axios
+            setExec(() => () => axios
                 .get(url, header)
                 .then((res) => {
                     setIsLoading(false)
@@ -36,26 +21,12 @@ const useRequestData = (method, url, body, header ) => {
                     setIsLoading(false)
                     setError(err)
                 })
+            )
         }
         else if (method === "post"){
-            // setIsLoading(true)
-            // exec = () => {
-            //     axios
-            //         .post(url, body, header)
-            //         .then((res) => {
-            //             setIsLoading(false)
-            //             setData(res.data)
-            //             alert("ok")
-            //         })
-            //         .catch((err) => {
-            //             setIsLoading(false)
-            //             setError(err)
-            //             alert("deu ruim-")
-            //         })
-            // }
-
             setIsLoading(true)
-            axios
+            console.log("redefining post exec");
+            setExec(() => () => axios
                 .post(url, body, header)
                 .then((res) => {
                     setIsLoading(false)
@@ -65,8 +36,9 @@ const useRequestData = (method, url, body, header ) => {
                 .catch((err) => {
                     setIsLoading(false)
                     setError(err)
-                    alert("deu ruim-")
+                    console.log("deu ruim-",err.response)
                 })
+            )
         }
         else if (method === "delete"){
             // setIsLoading(true)
@@ -127,7 +99,7 @@ const useRequestData = (method, url, body, header ) => {
         
     }, [url])
     
-    return [data, isLoading, error]
+    return [data, isLoading, error, exec]
 }
 
 export default useRequestData

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import useRequestData from "../../hooks/useRequestData"
 import { UrlBase } from "../../constants/constants"
@@ -6,19 +6,35 @@ import { UrlBase } from "../../constants/constants"
 const ApplicationFormPage = () => {
     const [inputTrip, setInputTrip] = useState("")
     const [inputName, setInputName] = useState("")
-    const [inputAge, setInputAge] = useState()
+    const [inputAge, setInputAge] = useState("")
     const [inputApplicationText, setInputApplicationText] = useState("")
     const [inputProfession, setInputProfession] = useState("")
     const [inputCountry, setInputCountry] = useState("")
 
     const navigate = useNavigate()
-    const [trips, loading, error, exec] = useRequestData("get", `${UrlBase}/trips`)
-    
+    const [trips, loading, error, tripsExec] = useRequestData("get", `${UrlBase}/trips`)
+    const [applyResponse, applyIsLoading, applyError, applyExec] = useRequestData(
+        "post", 
+        `${UrlBase}/trips/${inputTrip}/apply`, 
+        {
+            "name": inputName,
+            "age": inputAge,
+            "applicationText": inputApplicationText,
+            "profession": inputProfession,
+            "country": inputCountry
+        },
+        {
+            "Content-Type": "application/json"
+        })
     const listTrips = trips.trips && trips.trips.map((iten) => {
         return(
             <option key={iten.id} value={iten.id}>{iten.name}</option>
         )
     })
+
+    useEffect(() => {
+        tripsExec && tripsExec()
+    }, [tripsExec]);
 
     const handleChangeTrip = (e) => {
         setInputTrip(e.target.value)
@@ -46,27 +62,15 @@ const ApplicationFormPage = () => {
 
     const OnClickApplyToTrip = (e) => {
         e.preventDefault()
-        const [data, isLoading, error] = useRequestData(
-            "post", 
-            `${UrlBase}/trips/${inputTrip}/apply`, 
-            {
-                "name": inputName,
-                "age": inputAge,
-                "applicationText": inputApplicationText,
-                "profession": inputProfession,
-                "country": inputCountry
-            },
-            {
-                "Content-Type": "application/json"
-            })
+        applyExec();
 
-        console.log("apply", data)
+        console.log("apply", applyResponse)
         
         return(
             <>
-                {isLoading && (alert("Enviando dados..."))}
-                {!isLoading && error && (alert("Ocorreu um erro"))}
-                {!isLoading && data && (alert("Deu Bom"))}
+                {applyIsLoading && (alert("Enviando dados..."))}
+                {!applyIsLoading && applyError && (alert("Ocorreu um erro"))}
+                {!applyIsLoading && applyResponse && (alert("Deu Bom"))}
             </>
         )
 
