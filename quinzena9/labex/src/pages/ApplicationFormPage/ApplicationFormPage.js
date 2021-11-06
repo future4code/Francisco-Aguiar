@@ -48,34 +48,6 @@ const ApplicationFormPage = () => {
 
     const OnClickApplyToTrip = (e) => {
         e.preventDefault()
-        // const [data, isLoading, error] = useRequestData(
-        //     "post", 
-        //     `${UrlBase}/trips/${inputTrip}/apply`, 
-        //     {
-        //         "name": inputName,
-        //         "age": inputAge,
-        //         "applicationText": inputApplicationText,
-        //         "profession": inputProfession,
-        //         "country": inputCountry
-        //     },
-        //     {
-        //         "Content-Type": "application/json"
-        //     })
-
-        // console.log("apply", data)
-        
-        // return(
-        //     <>
-        //         {isLoading && (alert("Enviando dados..."))}
-        //         {!isLoading && error && (alert("Ocorreu um erro"))}
-        //         {!isLoading && data && (alert("Deu Bom"))}
-        //     </>
-        // )
-
-        const [data, setData] = useState([])
-        const [isLoading, setIsLoading] = useState(false)
-        const [errorApply, setErrorApply] = useState("")
-
         const body = {
             "name": inputName,
             "age": inputAge,
@@ -88,20 +60,15 @@ const ApplicationFormPage = () => {
             "Content-Type" : "application/json"
         }
 
-        setIsLoading(true)
         axios
             .post(`${UrlBase}/trips/${inputTrip}/apply`, body, header)
             .then((res) => {
-                setIsLoading(false)
-                setData(res)
                 alert("Application registered successfully")
+                console.log(res)
             })
             .catch((err) => {
-                setIsLoading(false)
-                setErrorApply("Erro! Tente novamente")
+                alert("error")
             })
-        
-        console.log("apply",data)
     }
 
     return(
