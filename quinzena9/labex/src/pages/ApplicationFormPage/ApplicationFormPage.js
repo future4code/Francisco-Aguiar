@@ -12,8 +12,8 @@ const ApplicationFormPage = () => {
     const [inputCountry, setInputCountry] = useState("")
 
     const navigate = useNavigate()
-    const [trips, loading, error] = useRequestData("get", `${UrlBase}/trips`)
-
+    const [trips, loading, error, exec] = useRequestData("get", `${UrlBase}/trips`)
+    
     const listTrips = trips.trips && trips.trips.map((iten) => {
         return(
             <option key={iten.id} value={iten.id}>{iten.name}</option>
@@ -44,7 +44,8 @@ const ApplicationFormPage = () => {
         setInputCountry(e.target.value)
     }
 
-    const OnClickApplyToTrip = () => {
+    const OnClickApplyToTrip = (e) => {
+        e.preventDefault()
         const [data, isLoading, error] = useRequestData(
             "post", 
             `${UrlBase}/trips/${inputTrip}/apply`, 
@@ -79,7 +80,7 @@ const ApplicationFormPage = () => {
             </header>
             <main>
                 <h1>Inscreva-se para uma viagem!</h1>
-                <form>
+                <form onSubmit={OnClickApplyToTrip}>
                     <select value={inputTrip} onChange={handleChangeTrip}>
                         <option value="" disabled selected>Escolha uma viagem...</option>
                         {loading && <p>Carregando...</p>}
@@ -277,7 +278,7 @@ const ApplicationFormPage = () => {
 
                     <div>
                         <button onClick= {() => navigate("/listtrips")}>Ver Lista de Viagens</button>
-                        <button onClick={OnClickApplyToTrip}>Enviar</button>
+                        <button type="submit">Enviar</button>
                     </div> 
                 </form>
             </main>

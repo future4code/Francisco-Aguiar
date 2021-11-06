@@ -6,8 +6,25 @@ const useRequestData = (method, url, body, header ) => {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState("")
 
+    let exec
     useEffect(() => {
+        
         if (method === "get"){
+            // setIsLoading(true)
+            // exec = () => {
+            //     axios
+            //         .get(url, header)
+            //         .then((res) => {
+            //             setIsLoading(false)
+            //             setData(res.data)
+            //         })
+            //         .catch((err) => {
+            //             setIsLoading(false)
+            //             setError(err)
+            //         })
+            // }
+
+
             setIsLoading(true)
             axios
                 .get(url, header)
@@ -21,6 +38,22 @@ const useRequestData = (method, url, body, header ) => {
                 })
         }
         else if (method === "post"){
+            // setIsLoading(true)
+            // exec = () => {
+            //     axios
+            //         .post(url, body, header)
+            //         .then((res) => {
+            //             setIsLoading(false)
+            //             setData(res.data)
+            //             alert("ok")
+            //         })
+            //         .catch((err) => {
+            //             setIsLoading(false)
+            //             setError(err)
+            //             alert("deu ruim-")
+            //         })
+            // }
+
             setIsLoading(true)
             axios
                 .post(url, body, header)
@@ -36,6 +69,20 @@ const useRequestData = (method, url, body, header ) => {
                 })
         }
         else if (method === "delete"){
+            // setIsLoading(true)
+            // exec = () => {
+            //     axios
+            //         .delete(url, header)
+            //         .then((res) => {
+            //             setIsLoading(false)
+            //             setData(res.data)
+            //         })
+            //         .catch((err => {
+            //             setIsLoading(false)
+            //             setError(err)
+            //         }))    
+            // }
+
             setIsLoading(true)
             axios
                 .delete(url, header)
@@ -49,6 +96,21 @@ const useRequestData = (method, url, body, header ) => {
                 }))
         }
         else if (method === "put"){
+            // setIsLoading(true)
+            // exec = () => {
+            //     axios
+            //         .put(url, body, header)
+            //         .then((res) => {
+            //             setIsLoading(false)
+            //             setData(res.data)
+            //         })
+            //         .catch((err) => {
+            //             setIsLoading(false)
+            //             setError(err)
+            //         })
+    
+            // }
+
             setIsLoading(true)
             axios
                 .put(url, body, header)
@@ -61,6 +123,8 @@ const useRequestData = (method, url, body, header ) => {
                     setError(err)
                 })
         }
+
+        
     }, [url])
     
     return [data, isLoading, error]

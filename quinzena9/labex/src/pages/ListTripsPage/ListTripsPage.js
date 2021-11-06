@@ -5,6 +5,7 @@ import { UrlBase } from "../../constants/constants"
 const ListTripsPage = () =>{
     const navigate = useNavigate()
     const [data, isLoading, error] = useRequestData("get", `${UrlBase}/trips`)
+    
     const listTrips = data.trips && data.trips.map((trip) => {
         return(
             <div key={trip.id}>
@@ -16,6 +17,7 @@ const ListTripsPage = () =>{
             </div>
         )
     })
+
 
     return(
         <>
