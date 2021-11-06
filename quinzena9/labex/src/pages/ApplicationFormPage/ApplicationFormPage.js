@@ -63,11 +63,10 @@ const ApplicationFormPage = () => {
         axios
             .post(`${UrlBase}/trips/${inputTrip}/apply`, body, header)
             .then((res) => {
-                alert("Application registered successfully")
-                console.log(res)
+                alert("Aplicação registrada com sucesso!")
             })
             .catch((err) => {
-                alert("error")
+                alert("Erro! Tente novamente!")
             })
     }
 

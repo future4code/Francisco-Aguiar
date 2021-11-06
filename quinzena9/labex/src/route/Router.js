@@ -3,6 +3,8 @@ import HomePage from "../pages/HomePage/HomePage";
 import ListTripsPage from "../pages/ListTripsPage/ListTripsPage";
 import ApplicationFormPage from "../pages/ApplicationFormPage/ApplicationFormPage"
 import LoginPage from "../pages/LoginPage/LoginPage"
+import AdminHomePage from "../pages/AdminHomePage/AdminHomePage"
+
 
 
 
@@ -23,6 +25,10 @@ const Router = () => {
 
             <Routes>
                 <Route path= "login" element= {<LoginPage/>}/>
+            </Routes>
+
+            <Routes>
+                <Route path= "admin" element= {<AdminHomePage/>}/>
             </Routes>
         </BrowserRouter>
     )
