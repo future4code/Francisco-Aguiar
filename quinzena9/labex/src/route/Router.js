@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage/HomePage";
 import ListTripsPage from "../pages/ListTripsPage/ListTripsPage";
 import ApplicationFormPage from "../pages/ApplicationFormPage/ApplicationFormPage"
+import LoginPage from "../pages/LoginPage/LoginPage"
+
 
 
 const Router = () => {
@@ -17,6 +19,10 @@ const Router = () => {
 
             <Routes>
                 <Route path= "/applicationforme" element= {<ApplicationFormPage/>}/>
+            </Routes>
+
+            <Routes>
+                <Route path= "login" element= {<LoginPage/>}/>
             </Routes>
         </BrowserRouter>
     )

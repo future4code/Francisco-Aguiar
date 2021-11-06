@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router"
 import useRequestData from "../../hooks/useRequestData"
 import { UrlBase } from "../../constants/constants"
+import axios from "axios"
+
 
 const ApplicationFormPage = () => {
     const [inputTrip, setInputTrip] = useState("")
@@ -12,7 +14,7 @@ const ApplicationFormPage = () => {
     const [inputCountry, setInputCountry] = useState("")
 
     const navigate = useNavigate()
-    const [trips, loading, error, exec] = useRequestData("get", `${UrlBase}/trips`)
+    const [trips, loading, error] = useRequestData("get", `${UrlBase}/trips`)
     
     const listTrips = trips.trips && trips.trips.map((iten) => {
         return(
@@ -46,30 +48,60 @@ const ApplicationFormPage = () => {
 
     const OnClickApplyToTrip = (e) => {
         e.preventDefault()
-        const [data, isLoading, error] = useRequestData(
-            "post", 
-            `${UrlBase}/trips/${inputTrip}/apply`, 
-            {
-                "name": inputName,
-                "age": inputAge,
-                "applicationText": inputApplicationText,
-                "profession": inputProfession,
-                "country": inputCountry
-            },
-            {
-                "Content-Type": "application/json"
-            })
+        // const [data, isLoading, error] = useRequestData(
+        //     "post", 
+        //     `${UrlBase}/trips/${inputTrip}/apply`, 
+        //     {
+        //         "name": inputName,
+        //         "age": inputAge,
+        //         "applicationText": inputApplicationText,
+        //         "profession": inputProfession,
+        //         "country": inputCountry
+        //     },
+        //     {
+        //         "Content-Type": "application/json"
+        //     })
 
-        console.log("apply", data)
+        // console.log("apply", data)
         
-        return(
-            <>
-                {isLoading && (alert("Enviando dados..."))}
-                {!isLoading && error && (alert("Ocorreu um erro"))}
-                {!isLoading && data && (alert("Deu Bom"))}
-            </>
-        )
+        // return(
+        //     <>
+        //         {isLoading && (alert("Enviando dados..."))}
+        //         {!isLoading && error && (alert("Ocorreu um erro"))}
+        //         {!isLoading && data && (alert("Deu Bom"))}
+        //     </>
+        // )
 
+        const [data, setData] = useState([])
+        const [isLoading, setIsLoading] = useState(false)
+        const [errorApply, setErrorApply] = useState("")
+
+        const body = {
+            "name": inputName,
+            "age": inputAge,
+            "applicationText": inputApplicationText,
+            "profession": inputProfession,
+            "country": inputCountry
+        }
+
+        const header = {
+            "Content-Type" : "application/json"
+        }
+
+        setIsLoading(true)
+        axios
+            .post(`${UrlBase}/trips/${inputTrip}/apply`, body, header)
+            .then((res) => {
+                setIsLoading(false)
+                setData(res)
+                alert("Application registered successfully")
+            })
+            .catch((err) => {
+                setIsLoading(false)
+                setErrorApply("Erro! Tente novamente")
+            })
+        
+        console.log("apply",data)
     }
 
     return(

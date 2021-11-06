@@ -6,7 +6,7 @@ const useRequestData = (method, url, body, header ) => {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState("")
 
-    let exec
+    // let exec
     useEffect(() => {
         
         if (method === "get"){
