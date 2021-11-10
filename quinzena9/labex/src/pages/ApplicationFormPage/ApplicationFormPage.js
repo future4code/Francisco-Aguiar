@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import useRequestData from "../../hooks/useRequestData"
 import { UrlBase } from "../../constants/constants"
@@ -12,15 +12,34 @@ const ApplicationFormPage = () => {
     const [inputApplicationText, setInputApplicationText] = useState("")
     const [inputProfession, setInputProfession] = useState("")
     const [inputCountry, setInputCountry] = useState("")
-
-    const navigate = useNavigate()
-    const [trips, loading, error] = useRequestData("get", `${UrlBase}/trips`)
     
+    const navigate = useNavigate()
+    const [trips, loading, error, tripsExec] = useRequestData("get", `${UrlBase}/trips`)
+    
+    const [applyResponse, applyLoading, applyError, applyExec] = useRequestData(
+        'post', 
+        `${UrlBase}/trips/${inputTrip}/apply`, 
+        {
+            "name": inputName,
+            "age": inputAge,
+            "applicationText": inputApplicationText,
+            "profession": inputProfession,
+            "country": inputCountry
+        },
+        {
+            "Content-Type": "application/json"
+        }
+        )
+
     const listTrips = trips.trips && trips.trips.map((iten) => {
         return(
             <option key={iten.id} value={iten.id}>{iten.name}</option>
         )
     })
+
+    useEffect(() => {
+        tripsExec && tripsExec()
+    }, [tripsExec])
 
     const handleChangeTrip = (e) => {
         setInputTrip(e.target.value)
@@ -48,26 +67,38 @@ const ApplicationFormPage = () => {
 
     const OnClickApplyToTrip = (e) => {
         e.preventDefault()
-        const body = {
-            "name": inputName,
-            "age": inputAge,
-            "applicationText": inputApplicationText,
-            "profession": inputProfession,
-            "country": inputCountry
-        }
+        applyExec()
 
-        const header = {
-            "Content-Type" : "application/json"
-        }
+        console.log ("apply", applyResponse)
 
-        axios
-            .post(`${UrlBase}/trips/${inputTrip}/apply`, body, header)
-            .then((res) => {
-                alert("Aplicação registrada com sucesso!")
-            })
-            .catch((err) => {
-                alert("Erro! Tente novamente!")
-            })
+        return(
+            <>
+                {applyLoading && (console.log("enviando dados"))}
+                {!applyLoading && applyError && (alert("Ocorreu um erro! Tente novamente!"))}
+                {!applyLoading && applyResponse && (alert("Aplicação registrada com sucesso!"))}
+            </>
+        )
+
+        // const body = {
+        //     "name": inputName,
+        //     "age": inputAge,
+        //     "applicationText": inputApplicationText,
+        //     "profession": inputProfession,
+        //     "country": inputCountry
+        // }
+
+        // const header = {
+        //     "Content-Type" : "application/json"
+        // }
+
+        // axios
+        //     .post(`${UrlBase}/trips/${inputTrip}/apply`, body, header)
+        //     .then((res) => {
+        //         alert("Aplicação registrada com sucesso!")
+        //     })
+        //     .catch((err) => {
+        //         alert("Erro! Tente novamente!")
+        //     })
     }
 
     return(

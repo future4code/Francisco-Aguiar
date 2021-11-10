@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router"
 import useRequestData from "../../hooks/useRequestData"
 import { UrlBase } from "../../constants/constants"
+import { useEffect } from "react"
 
 const ListTripsPage = () =>{
     const navigate = useNavigate()
-    const [data, isLoading, error] = useRequestData("get", `${UrlBase}/trips`)
+    const [data, isLoading, error, exec] = useRequestData("get", `${UrlBase}/trips`)
     
     const listTrips = data.trips && data.trips.map((trip) => {
         return(
@@ -17,6 +18,10 @@ const ListTripsPage = () =>{
             </div>
         )
     })
+
+    useEffect(() => {
+        exec && exec()
+    }, [exec])
 
 
     return(
