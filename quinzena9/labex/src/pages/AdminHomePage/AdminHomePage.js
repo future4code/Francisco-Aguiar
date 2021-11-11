@@ -1,21 +1,33 @@
 import useRequestData from "../../hooks/useRequestData"
 import { UrlBase } from "../../constants/constants"
 import { useNavigate } from "react-router"
+import useProtectedPage from "../../hooks/useProtectedPage"
+import { useEffect } from "react"
 
 
 const AdminHomePage = () => {
+    useProtectedPage()
+
     const navigate = useNavigate()
-    const [data, isLoading, error] = useRequestData("get", `${UrlBase}/trips`)
+    const [data, isLoading, error, exec] = useRequestData("get", `${UrlBase}/trips`)
 
     const listTrips = data.trips && data.trips.map((trip) => {
         return(
             <div key={trip.id}>
                 <h3>{trip.name}</h3>
-                <button>Detalhes</button>
+                <button onClick = {() => goTripDetailsPage(trip.id)}>Detalhes</button>
                 <button>Excluir</button>
             </div>
         )
     })
+    
+    useEffect(() => {
+        exec && exec()
+    }, [exec])
+
+    const goTripDetailsPage = (id) => {
+        navigate(`tripdetails/${id}`)
+    }
 
     return (
         <>

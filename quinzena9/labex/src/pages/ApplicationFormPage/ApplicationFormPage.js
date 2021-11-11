@@ -16,20 +16,20 @@ const ApplicationFormPage = () => {
     const navigate = useNavigate()
     const [trips, loading, error, tripsExec] = useRequestData("get", `${UrlBase}/trips`)
     
-    const [applyResponse, applyLoading, applyError, applyExec] = useRequestData(
-        'post', 
-        `${UrlBase}/trips/${inputTrip}/apply`, 
-        {
-            "name": inputName,
-            "age": inputAge,
-            "applicationText": inputApplicationText,
-            "profession": inputProfession,
-            "country": inputCountry
-        },
-        {
-            "Content-Type": "application/json"
-        }
-        )
+    // const [applyResponse, applyLoading, applyError, applyExec] = useRequestData(
+    //     'post', 
+    //     `${UrlBase}/trips/${inputTrip}/apply`, 
+    //     {
+    //         "name": inputName,
+    //         "age": inputAge,
+    //         "applicationText": inputApplicationText,
+    //         "profession": inputProfession,
+    //         "country": inputCountry
+    //     },
+    //     {
+    //         "Content-Type": "application/json"
+    //     }
+    //     )
 
     const listTrips = trips.trips && trips.trips.map((iten) => {
         return(
@@ -67,38 +67,44 @@ const ApplicationFormPage = () => {
 
     const OnClickApplyToTrip = (e) => {
         e.preventDefault()
-        applyExec()
+        // applyExec()
 
-        console.log ("apply", applyResponse)
+        // console.log ("apply", applyResponse)
 
-        return(
-            <>
-                {applyLoading && (console.log("enviando dados"))}
-                {!applyLoading && applyError && (alert("Ocorreu um erro! Tente novamente!"))}
-                {!applyLoading && applyResponse && (alert("Aplicação registrada com sucesso!"))}
-            </>
-        )
+        // return(
+        //     <>
+        //         {applyLoading && (console.log("enviando dados"))}
+        //         {!applyLoading && applyError && (alert("Ocorreu um erro! Tente novamente!"))}
+        //         {!applyLoading && applyResponse && (alert("Aplicação registrada com sucesso!"))}
+        //     </>
+        // )
 
-        // const body = {
-        //     "name": inputName,
-        //     "age": inputAge,
-        //     "applicationText": inputApplicationText,
-        //     "profession": inputProfession,
-        //     "country": inputCountry
-        // }
+        const body = {
+            "name": inputName,
+            "age": inputAge,
+            "applicationText": inputApplicationText,
+            "profession": inputProfession,
+            "country": inputCountry
+        }
 
-        // const header = {
-        //     "Content-Type" : "application/json"
-        // }
+        const header = {
+            "Content-Type" : "application/json"
+        }
 
-        // axios
-        //     .post(`${UrlBase}/trips/${inputTrip}/apply`, body, header)
-        //     .then((res) => {
-        //         alert("Aplicação registrada com sucesso!")
-        //     })
-        //     .catch((err) => {
-        //         alert("Erro! Tente novamente!")
-        //     })
+        axios
+            .post(`${UrlBase}/trips/${inputTrip}/apply`, body, header)
+            .then((res) => {
+                alert("Aplicação registrada com sucesso!")
+                setInputTrip("")
+                setInputName("")
+                setInputAge(undefined)
+                setInputApplicationText("")
+                setInputProfession("")
+                setInputCountry("")
+            })
+            .catch((err) => {
+                alert("Erro! Tente novamente!")
+            })
     }
 
     return(

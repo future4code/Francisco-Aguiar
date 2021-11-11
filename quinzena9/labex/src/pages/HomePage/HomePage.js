@@ -7,7 +7,7 @@ const HomePage = () => {
         <>
             <h1>Space Trips 🛸</h1>
             <button onClick={() => navigate("/listtrips")}>Viagens</button>
-            <button>Área Admin</button>
+            <button onClick= {() => navigate("/admin")}>Área Admin</button>
         </>
     )
 }
