@@ -3,12 +3,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { UrlBase } from "../../constants/constants";
 import useProtectedPage from "../../hooks/useProtectedPage";
+import { useNavigate } from "react-router"
+
 
 const TripDetailsPage = () => {
     useProtectedPage()
+    const navigate = useNavigate()
     const [tripDetails, setTripDetails] = useState()
     const pathParams = useParams()
     const token = localStorage.getItem("token")
+    const [updatePage, setUpdatePage] = useState(false)
 
     useEffect(() => {
         axios
@@ -20,32 +24,66 @@ const TripDetailsPage = () => {
         .catch((err) => {
             console.log("erro", err.response)
         })
-    }, [])
+    }, [updatePage])
+
+    const onClickDecideCandidate = (candidateId, response) => {
+        if(response === "acepted"){
+            axios
+                .put(`${UrlBase}/trips/${pathParams.idtrip}/candidates/${candidateId}/decide`, 
+                {"approve": true},
+                {headers: {
+                    "Content-Type": "application/json",
+                    "auth" : token
+                }} )
+                .then((res) => {
+                    alert("Candidato aprovado com sucesso!")
+                    setUpdatePage(!updatePage)
+                })
+                .catch((err) => {
+                    alert("Ocorreu um erro! Tente novamente.")
+                })
+        }
+        else if(response === "rejected"){
+            axios
+                .put(`${UrlBase}/trips/${pathParams.idtrip}/candidates/${candidateId}/decide`, 
+                {"approve": false},
+                {headers: {
+                    "Content-Type": "application/json",
+                    "auth" : token
+                }} )
+                .then((res) => {
+                    alert("Candidato rejeitado com sucesso!")
+                    setUpdatePage(!updatePage)
+                })
+                .catch((err) => {
+                    alert("Ocorreu um erro! Tente novamente.")
+                })            
+        }
+
+    }
 
     const candidatesPendingList = tripDetails && tripDetails.candidates.map((candidate) => {
         return(
             <div key={candidate.id}>
                 <p><b>Nome:</b> {candidate.name}</p>
                 <p><b>Idade:</b> {candidate.age}</p>
-                <p><b>Texto de candidatura:</b> {candidate.applicationText}</p>
                 <p><b>Profissão:</b> {candidate.profession}</p>
                 <p><b>Nacionalidade:</b> {candidate.country}</p>
-                <button>Aceitar</button>
-                <button>Rejeitar</button>
+                <p><b>Texto de candidatura:</b> {candidate.applicationText}</p>
+                <div>
+                    <button onClick = {() => onClickDecideCandidate(candidate.id, "acepted")}>Aceitar</button>
+                    <button onClick = {() => onClickDecideCandidate(candidate.id, "rejected")}>Rejeitar</button>
+                </div>
             </div>
         )
     })
     
     const candidatesApprovedList = tripDetails && tripDetails.approved.map((candidate) => {
         return(
-            <div key={candidate.id}>
-                <p><b>Nome:</b> {candidate.name}</p>
-                <p><b>Idade:</b> {candidate.age}</p>
-                <p><b>Texto de candidatura:</b> {candidate.applicationText}</p>
-                <p><b>Profissão:</b> {candidate.profession}</p>
-                <p><b>Nacionalidade:</b> {candidate.country}</p>
-                <button>Aceitar</button>
-                <button>Rejeitar</button>
+            <div>
+                <ul key={candidate.id}>
+                    <li>{candidate.name}</li>
+                </ul>
             </div>
         )
     })
@@ -58,7 +96,7 @@ const TripDetailsPage = () => {
         <>
             <header>
                 <h2>Space Trips 🛸</h2>
-                <button>Voltar</button>
+                <button onClick = {() => navigate(-1)}>Voltar</button>
             </header>
             <main>
                 <div>
