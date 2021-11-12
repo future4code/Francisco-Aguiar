@@ -1,13 +1,12 @@
 import { useNavigate } from "react-router"
-import useRequestData from "../../hooks/useRequestData"
 import { UrlBase } from "../../constants/constants"
-import { useEffect } from "react"
+import { useRequestGet } from "../../hooks/useRequest"
 
 const ListTripsPage = () =>{
     const navigate = useNavigate()
-    const [data, isLoading, error, exec] = useRequestData("get", `${UrlBase}/trips`)
-    
-    const listTrips = data.trips && data.trips.map((trip) => {
+    let result = useRequestGet(`${UrlBase}/trips`)
+
+    const listTrips = result.data.trips && result.data.trips.map((trip) => {
         return(
             <div key={trip.id}>
                 <p><b>Nome:</b> {trip.name}</p>
@@ -18,11 +17,6 @@ const ListTripsPage = () =>{
             </div>
         )
     })
-
-    useEffect(() => {
-        exec && exec()
-    }, [exec])
-
 
     return(
         <>
@@ -35,10 +29,10 @@ const ListTripsPage = () =>{
             <main>
                 <h1>Viagens Disponíveis</h1>
                 <div>
-                    {isLoading && <p>Carregando...</p>}
-                    {!isLoading && error && <p>Ocorreu um erro!</p>}
-                    {!isLoading && data.trips && data.trips.length > 0 && listTrips}
-                    {!isLoading && data.trips && data.trips.length === 0 && (<p>Não há viagens disponíveis!</p>)}
+                    {result.isLoading && <p>Carregando...</p>}
+                    {!result.isLoading && result.error && <p>Ocorreu um erro!</p>}
+                    {!result.isLoading && result.data.trips && result.data.trips.length > 0 && listTrips}
+                    {!result.isLoading && result.data.trips && result.data.trips.length === 0 && (<p>Não há viagens disponíveis!</p>)}
                 </div>
             </main>
         </>
