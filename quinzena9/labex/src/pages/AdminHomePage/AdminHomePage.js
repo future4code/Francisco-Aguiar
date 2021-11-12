@@ -33,6 +33,12 @@ const AdminHomePage = () => {
         navigate(`tripdetails/${id}`)
     }
 
+    const onClickLogout = () => {
+        console.log("clicou")
+        localStorage.removeItem("token")
+        navigate("/login")
+    }
+
     const deleteTrip = (tripId) => {
          
         if(window.confirm("Tem certeza que deseja excluir essa viagem?")){
@@ -59,7 +65,7 @@ const AdminHomePage = () => {
             <header>
                 <h2>Space Trips 🛸</h2>
                 <button onClick= {() => {navigate("/")}}>Home</button>
-                <button>Logout</button>
+                <button onClick = {onClickLogout}>Logout</button>
             </header>
             <main>
                 <h1>Área Administrativa</h1>
