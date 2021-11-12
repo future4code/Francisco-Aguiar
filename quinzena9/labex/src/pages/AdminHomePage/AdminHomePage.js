@@ -63,6 +63,7 @@ const AdminHomePage = () => {
             </header>
             <main>
                 <h1>Área Administrativa</h1>
+                <button onClick={() => navigate("/admin/createtrip")}>Criar Viagem</button>
                 <div>
                     {isLoading && <p>Carregando...</p>}
                     {!isLoading && error && <p>Ocorreu um erro!</p>}

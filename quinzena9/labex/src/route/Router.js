@@ -5,6 +5,8 @@ import ApplicationFormPage from "../pages/ApplicationFormPage/ApplicationFormPag
 import LoginPage from "../pages/LoginPage/LoginPage"
 import AdminHomePage from "../pages/AdminHomePage/AdminHomePage"
 import TripDetailsPage from "../pages/TripDetailsPage/TripDetailsPage.js"
+import CreateTripPage from "../pages/CreateTripPage/CreateTripPage.js"
+
 
 
 
@@ -35,6 +37,10 @@ const Router = () => {
 
             <Routes>
                 <Route path = "admin/tripdetails/:idtrip" element = {<TripDetailsPage/>}/>
+            </Routes>
+
+            <Routes>
+                <Route path = "admin/createtrip" element = {<CreateTripPage/>} />
             </Routes>
         </BrowserRouter>
     )
