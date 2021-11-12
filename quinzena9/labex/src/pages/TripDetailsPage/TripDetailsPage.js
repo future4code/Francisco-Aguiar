@@ -87,10 +87,6 @@ const TripDetailsPage = () => {
             </div>
         )
     })
-    console.log("token", token)
-    console.log("requ", tripDetails)
-    console.log("params", pathParams)
-    console.log("candidatos", candidatesPendingList)
 
     return(
         <>

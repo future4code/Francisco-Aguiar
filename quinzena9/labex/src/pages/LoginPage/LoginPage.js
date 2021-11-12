@@ -4,19 +4,12 @@ import { useNavigate } from "react-router"
 import { UrlBase } from "../../constants/constants"
 
 const LoginPage = () => {
-    const [inputEmail, setInputEmail] = useState("")
-    const [inputPassword, setInputPassword] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
-
+    const [informations, setInformations] = useState({
+        email: "",
+        password: "",
+    })
+    console.log("info", informations)
     const navigate = useNavigate()
-
-    const handleChangeEmail = (e) => {
-        setInputEmail(e.target.value)
-    }
-
-    const handleChangePassword = (e) => {
-        setInputPassword(e.target.value)
-    }
 
     const onClickLogin = async () => {
         let token
@@ -24,8 +17,8 @@ const LoginPage = () => {
 
         await axios
              .post(`${UrlBase}/login`, {
-                "email": inputEmail,
-            	"password": inputPassword
+                "email": informations.email,
+            	"password": informations.password
             }, {
                 "Content-Type": "application/json"
             })
@@ -54,10 +47,19 @@ const LoginPage = () => {
             <main>
                 <div>
                     <h1>Login</h1>
-                    <input placeholder= "Email" value= {inputEmail} onChange= {handleChangeEmail} />
-                    <input placeholder= "Senha" type= "password" value= {inputPassword} onChange= {handleChangePassword}/>
+                    <input 
+                        placeholder= "Email" 
+                        value= {informations.email} 
+                        onChange= {(e)=> setInformations({...informations, email: e.target.value})} 
+                    />
+                    <input 
+                        placeholder= "Senha"   
+                        type= "password" 
+                        value= {informations.password} 
+                        onChange= {(e)=> setInformations({...informations, password: e.target.value})}
+                    />
                     <button onClick= {() => {navigate("/")}}>Voltar</button>
-                        <button onClick= {onClickLogin} >Login</button>
+                    <button onClick= {onClickLogin} >Login</button>
                 </div>
             </main>
 

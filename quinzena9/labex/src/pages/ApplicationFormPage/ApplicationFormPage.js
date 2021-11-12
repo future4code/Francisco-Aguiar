@@ -6,31 +6,17 @@ import axios from "axios"
 
 
 const ApplicationFormPage = () => {
-    const [inputTrip, setInputTrip] = useState("")
-    const [inputName, setInputName] = useState("")
-    const [inputAge, setInputAge] = useState()
-    const [inputApplicationText, setInputApplicationText] = useState("")
-    const [inputProfession, setInputProfession] = useState("")
-    const [inputCountry, setInputCountry] = useState("")
-    
+    const [inputInformations, setInputInformations] = useState ({
+        trip: "",
+        name: "",
+        age: "",
+        applicationText: "",
+        profession: "",
+        country: ""
+    })   
     const navigate = useNavigate()
     const [trips, loading, error, tripsExec] = useRequestData("get", `${UrlBase}/trips`)
     
-    // const [applyResponse, applyLoading, applyError, applyExec] = useRequestData(
-    //     'post', 
-    //     `${UrlBase}/trips/${inputTrip}/apply`, 
-    //     {
-    //         "name": inputName,
-    //         "age": inputAge,
-    //         "applicationText": inputApplicationText,
-    //         "profession": inputProfession,
-    //         "country": inputCountry
-    //     },
-    //     {
-    //         "Content-Type": "application/json"
-    //     }
-    //     )
-
     const listTrips = trips.trips && trips.trips.map((iten) => {
         return(
             <option key={iten.id} value={iten.id}>{iten.name}</option>
@@ -41,50 +27,15 @@ const ApplicationFormPage = () => {
         tripsExec && tripsExec()
     }, [tripsExec])
 
-    const handleChangeTrip = (e) => {
-        setInputTrip(e.target.value)
-    }
-
-    const handleChangeName = (e) => {
-        setInputName(e.target.value)
-    }
-
-    const handleChangeAge = (e) => {
-        setInputAge(e.target.value)
-    }
-
-    const handleChangeApplicationText = (e) => {
-        setInputApplicationText(e.target.value)
-    }
-
-    const handleChangeProfession = (e) => {
-        setInputProfession(e.target.value)
-    }
-
-    const handleChangeCountry = (e) => {
-        setInputCountry(e.target.value)
-    }
 
     const OnClickApplyToTrip = (e) => {
         e.preventDefault()
-        // applyExec()
-
-        // console.log ("apply", applyResponse)
-
-        // return(
-        //     <>
-        //         {applyLoading && (console.log("enviando dados"))}
-        //         {!applyLoading && applyError && (alert("Ocorreu um erro! Tente novamente!"))}
-        //         {!applyLoading && applyResponse && (alert("Aplicação registrada com sucesso!"))}
-        //     </>
-        // )
-
         const body = {
-            "name": inputName,
-            "age": inputAge,
-            "applicationText": inputApplicationText,
-            "profession": inputProfession,
-            "country": inputCountry
+            "name": inputInformations.name,
+            "age": inputInformations.age,
+            "applicationText": inputInformations.applicationText,
+            "profession": inputInformations.profession,
+            "country": inputInformations.country
         }
 
         const header = {
@@ -92,15 +43,18 @@ const ApplicationFormPage = () => {
         }
 
         axios
-            .post(`${UrlBase}/trips/${inputTrip}/apply`, body, header)
+            .post(`${UrlBase}/trips/${inputInformations.trip}/apply`, body, header)
             .then((res) => {
                 alert("Aplicação registrada com sucesso!")
-                setInputTrip("")
-                setInputName("")
-                setInputAge(undefined)
-                setInputApplicationText("")
-                setInputProfession("")
-                setInputCountry("")
+                setInputInformations({
+                    trip: "",
+                    name: "",
+                    age: "",
+                    applicationText: "",
+                    profession: "",
+                    country: ""
+                })
+                
             })
             .catch((err) => {
                 alert("Erro! Tente novamente!")
@@ -116,23 +70,21 @@ const ApplicationFormPage = () => {
             <main>
                 <h1>Inscreva-se para uma viagem!</h1>
                 <form onSubmit={OnClickApplyToTrip}>
-                    <select value={inputTrip} onChange={handleChangeTrip}>
+                    <select value={inputInformations.trip} onChange={(e) => setInputInformations({...inputInformations, trip: e.target.value})}>
                         <option value="" disabled selected>Escolha uma viagem...</option>
-                        {loading && <p>Carregando...</p>}
                         {!loading && error && <option>Não foi possível carregar as viagens</option>}
-                        {!loading && trips.trips && trips.trips.length > 0 && listTrips}
-                        {!loading && trips.trips && trips.trips.length === 0 && (<option></option>)}
+                        {!loading && trips.trips && listTrips}
                     </select>
 
-                    <input placeholder="Nome" value={inputName} onChange={handleChangeName}/>
+                    <input placeholder="Nome" value={inputInformations.name} onChange={(e)=>setInputInformations({...inputInformations, name: e.target.value})}/>
 
-                    <input placeholder="Idade" type="number" value={inputAge} onChange={handleChangeAge}/>
+                    <input placeholder="Idade" type="number" value={inputInformations.age} onChange={(e)=> setInputInformations({...inputInformations, age: e.target.value})}/>
 
-                    <input placeholder="Texto de Candidatura" value={inputApplicationText} onChange={handleChangeApplicationText}/>
+                    <input placeholder="Texto de Candidatura" value={inputInformations.applicationText} onChange={(e)=> setInputInformations({...inputInformations, applicationText: e.target.value})}/>
 
-                    <input placeholder="Profissão" value={inputProfession} onChange={handleChangeProfession}/>
+                    <input placeholder="Profissão" value={inputInformations.profession} onChange={(e)=> setInputInformations({...inputInformations, profession: e.target.value})}/>
 
-                    <select value={inputCountry} onChange={handleChangeCountry}>
+                    <select value={inputInformations.country} onChange={(e)=> setInputInformations({...inputInformations, country: e.target.value})}>
                         <option value="" disabled selected>Escolha um País</option>
                         <option value="África do Sul">África do Sul</option>
                         <option value="Albânia">Albânia</option>

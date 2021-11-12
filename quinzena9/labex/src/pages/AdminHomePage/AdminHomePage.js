@@ -34,7 +34,6 @@ const AdminHomePage = () => {
     }
 
     const onClickLogout = () => {
-        console.log("clicou")
         localStorage.removeItem("token")
         navigate("/login")
     }
