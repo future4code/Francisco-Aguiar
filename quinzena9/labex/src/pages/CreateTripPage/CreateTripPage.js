@@ -63,31 +63,36 @@ const CreateTripPage = () => {
                         placeholder= "Nome da Viagem" 
                         type="text" 
                         value={inputText.name} 
-                        onChange={(e) => {setInputText({...inputText, name: e.target.value})}} 
+                        onChange={(e) => {setInputText({...inputText, name: e.target.value})}}
+                        required 
                     />
                     <input 
                         placeholder= "Nome do Planeta" 
                         type="text" 
                         value={inputText.planet} 
                         onChange={(e) => {setInputText({...inputText, planet: e.target.value})}} 
+                        required
                     />
                     <input 
                         placeholder= "Data" 
                         type="date" 
                         value={inputText.date} 
-                        onChange={(e) => {setInputText({...inputText, date: e.target.value})}} 
+                        onChange={(e) => {setInputText({...inputText, date: e.target.value})}}
+                        required 
                     />
                     <input 
                         placeholder= "Descrição" 
                         type="text" 
                         value={inputText.description} 
-                        onChange={(e) => {setInputText({...inputText, description: e.target.value})}} 
+                        onChange={(e) => {setInputText({...inputText, description: e.target.value})}}
+                        required 
                     />
                     <input 
                         placeholder= "Duração em Dias" 
                         type="number" 
                         value={inputText.durationInDays} 
-                        onChange={(e) => {setInputText({...inputText, durationInDays: e.target.value})}} 
+                        onChange={(e) => {setInputText({...inputText, durationInDays: e.target.value})}}
+                        required 
                     />
                     
                     <button type= "submit">enviar</button>

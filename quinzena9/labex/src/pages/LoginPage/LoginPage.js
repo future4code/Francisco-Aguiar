@@ -10,7 +10,8 @@ const LoginPage = () => {
     })
     const navigate = useNavigate()
 
-    const onClickLogin = async () => {
+    const onClickLogin = async (e) => {
+        e.preventDefault()
         let token
         let error
 
@@ -41,24 +42,27 @@ const LoginPage = () => {
         <>
             <header>
                 <h2>Space Trips 🛸</h2>
+                <button onClick= {() => {navigate("/")}}>Home</button>
             </header>
             <main>
-                <div>
+                <form onSubmit= {onClickLogin}>
                     <h1>Login</h1>
                     <input 
                         placeholder= "Email" 
+                        type= "email"
                         value= {informations.email} 
-                        onChange= {(e)=> setInformations({...informations, email: e.target.value})} 
+                        onChange= {(e)=> setInformations({...informations, email: e.target.value})}
+                        required 
                     />
                     <input 
                         placeholder= "Senha"   
-                        type= "password" 
+                        type= "password"
                         value= {informations.password} 
                         onChange= {(e)=> setInformations({...informations, password: e.target.value})}
+                        required
                     />
-                    <button onClick= {() => {navigate("/")}}>Voltar</button>
-                    <button onClick= {onClickLogin} >Login</button>
-                </div>
+                    <button type="submit" >Login</button>
+                </form>
             </main>
 
         </>

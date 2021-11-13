@@ -61,11 +61,16 @@ const ApplicationFormPage = () => {
             <header>
                 <h2>Space Trips 🛸</h2>
                 <button onClick = {() => navigate("/")}>Home</button>
+                <button onClick= {() => navigate("/listtrips")}>Ver Lista de Viagens</button>
             </header>
             <main>
                 <h1>Inscreva-se para uma viagem!</h1>
                 <form onSubmit={OnClickApplyToTrip}>
-                    <select value={inputInformations.trip} onChange={(e) => setInputInformations({...inputInformations, trip: e.target.value})}>
+                    <select 
+                        value={inputInformations.trip} 
+                        onChange={(e) => setInputInformations({...inputInformations, trip: e.target.value})} 
+                        required
+                    >
                         <option value="" disabled selected>Escolha uma viagem...</option>
                         {!result.isLoading && result.error && <option>Não foi possível carregar as viagens</option>}
                         {!result.loading && result.data.trips && listTrips}
@@ -75,6 +80,7 @@ const ApplicationFormPage = () => {
                         placeholder="Nome" 
                         value={inputInformations.name} 
                         onChange={(e)=>setInputInformations({...inputInformations, name: e.target.value})}
+                        required
                     />
 
                     <input 
@@ -83,23 +89,27 @@ const ApplicationFormPage = () => {
                         min= "18" 
                         value={inputInformations.age} 
                         onChange={(e)=> setInputInformations({...inputInformations, age: e.target.value})}
+                        required
                     />
 
                     <input 
                         placeholder="Texto de Candidatura" 
                         value={inputInformations.applicationText} 
                         onChange={(e)=> setInputInformations({...inputInformations, applicationText: e.target.value})}
+                        required
                     />
 
                     <input 
                         placeholder="Profissão" 
                         value={inputInformations.profession} 
                         onChange={(e)=> setInputInformations({...inputInformations, profession: e.target.value})}
+                        required
                     />
 
                     <select 
                         value={inputInformations.country} 
                         onChange={(e)=> setInputInformations({...inputInformations, country: e.target.value})}
+                        required
                     >
                         <option value="" disabled selected>Escolha um País</option>
                         <option value="África do Sul">África do Sul</option>
@@ -279,11 +289,10 @@ const ApplicationFormPage = () => {
 
                     </select>
 
-                    <div>
-                        <button onClick= {() => navigate("/listtrips")}>Ver Lista de Viagens</button>
-                        <button type="submit">Enviar</button>
-                    </div> 
+                    <button type="submit">Enviar</button>
+                     
                 </form>
+
             </main>
         </>
     )
