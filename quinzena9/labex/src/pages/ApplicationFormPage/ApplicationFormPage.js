@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router"
-import useRequestData from "../../hooks/useRequestData"
 import { UrlBase } from "../../constants/constants"
 import axios from "axios"
+import { useRequestGet } from "../../hooks/useRequest"
 
 
 const ApplicationFormPage = () => {
@@ -15,18 +15,13 @@ const ApplicationFormPage = () => {
         country: ""
     })   
     const navigate = useNavigate()
-    const [trips, loading, error, tripsExec] = useRequestData("get", `${UrlBase}/trips`)
+    const result = useRequestGet(`${UrlBase}/trips`)
     
-    const listTrips = trips.trips && trips.trips.map((iten) => {
+    const listTrips = result.data.trips && result.data.trips.map((iten) => {
         return(
             <option key={iten.id} value={iten.id}>{iten.name}</option>
         )
     })
-
-    useEffect(() => {
-        tripsExec && tripsExec()
-    }, [tripsExec])
-
 
     const OnClickApplyToTrip = (e) => {
         e.preventDefault()
@@ -72,19 +67,40 @@ const ApplicationFormPage = () => {
                 <form onSubmit={OnClickApplyToTrip}>
                     <select value={inputInformations.trip} onChange={(e) => setInputInformations({...inputInformations, trip: e.target.value})}>
                         <option value="" disabled selected>Escolha uma viagem...</option>
-                        {!loading && error && <option>Não foi possível carregar as viagens</option>}
-                        {!loading && trips.trips && listTrips}
+                        {!result.isLoading && result.error && <option>Não foi possível carregar as viagens</option>}
+                        {!result.loading && result.data.trips && listTrips}
                     </select>
 
-                    <input placeholder="Nome" value={inputInformations.name} onChange={(e)=>setInputInformations({...inputInformations, name: e.target.value})}/>
+                    <input 
+                        placeholder="Nome" 
+                        value={inputInformations.name} 
+                        onChange={(e)=>setInputInformations({...inputInformations, name: e.target.value})}
+                    />
 
-                    <input placeholder="Idade" type="number" value={inputInformations.age} onChange={(e)=> setInputInformations({...inputInformations, age: e.target.value})}/>
+                    <input 
+                        placeholder="Idade" 
+                        type="number"
+                        min= "18" 
+                        value={inputInformations.age} 
+                        onChange={(e)=> setInputInformations({...inputInformations, age: e.target.value})}
+                    />
 
-                    <input placeholder="Texto de Candidatura" value={inputInformations.applicationText} onChange={(e)=> setInputInformations({...inputInformations, applicationText: e.target.value})}/>
+                    <input 
+                        placeholder="Texto de Candidatura" 
+                        value={inputInformations.applicationText} 
+                        onChange={(e)=> setInputInformations({...inputInformations, applicationText: e.target.value})}
+                    />
 
-                    <input placeholder="Profissão" value={inputInformations.profession} onChange={(e)=> setInputInformations({...inputInformations, profession: e.target.value})}/>
+                    <input 
+                        placeholder="Profissão" 
+                        value={inputInformations.profession} 
+                        onChange={(e)=> setInputInformations({...inputInformations, profession: e.target.value})}
+                    />
 
-                    <select value={inputInformations.country} onChange={(e)=> setInputInformations({...inputInformations, country: e.target.value})}>
+                    <select 
+                        value={inputInformations.country} 
+                        onChange={(e)=> setInputInformations({...inputInformations, country: e.target.value})}
+                    >
                         <option value="" disabled selected>Escolha um País</option>
                         <option value="África do Sul">África do Sul</option>
                         <option value="Albânia">Albânia</option>

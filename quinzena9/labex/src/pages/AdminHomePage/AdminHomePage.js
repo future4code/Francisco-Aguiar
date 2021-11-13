@@ -1,10 +1,9 @@
-import useRequestData from "../../hooks/useRequestData"
 import { UrlBase } from "../../constants/constants"
 import { useNavigate } from "react-router"
 import useProtectedPage from "../../hooks/useProtectedPage"
-import { useEffect } from "react"
 import axios from "axios"
-import { useState } from "react/cjs/react.development"
+import { useRequestGet } from "../../hooks/useRequest"
+
 
 
 const AdminHomePage = () => {
@@ -12,10 +11,10 @@ const AdminHomePage = () => {
 
     const navigate = useNavigate()
     const token = localStorage.getItem("token")
-    const [data, isLoading, error, exec] = useRequestData("get", `${UrlBase}/trips`)
-    const [updatePage, setUpdatePage] = useState(false)
 
-    const listTrips = data.trips && data.trips.map((trip) => {
+    const result = useRequestGet(`${UrlBase}/trips`)
+
+    const listTrips = result.data.trips && result.data.trips.map((trip) => {
         return(
             <div key={trip.id}>
                 <h3>{trip.name}</h3>
@@ -25,10 +24,6 @@ const AdminHomePage = () => {
         )
     })
     
-    useEffect(() => {
-        exec && exec()
-    }, [exec, updatePage])
-
     const goTripDetailsPage = (id) => {
         navigate(`tripdetails/${id}`)
     }
@@ -50,7 +45,7 @@ const AdminHomePage = () => {
             })
             .then((res) => {
                 alert("Viagem excluida com sucesso!")
-                setUpdatePage(!updatePage)
+                window.location.reload()
             })
             .catch((err) => {
                 alert("Erro! Não foi possível excluir esta viagem.")
@@ -70,10 +65,10 @@ const AdminHomePage = () => {
                 <h1>Área Administrativa</h1>
                 <button onClick={() => navigate("/admin/createtrip")}>Criar Viagem</button>
                 <div>
-                    {isLoading && <p>Carregando...</p>}
-                    {!isLoading && error && <p>Ocorreu um erro!</p>}
-                    {!isLoading && data.trips && data.trips.length > 0 && listTrips}
-                    {!isLoading && data.trips && data.trips.length === 0 && (<p>Não há viagens cadastradas!</p>)}
+                    {result.isLoading && <p>Carregando...</p>}
+                    {!result.isLoading && result.error && <p>Ocorreu um erro!</p>}
+                    {!result.isLoading && result.data.trips && result.data.trips.length > 0 && listTrips}
+                    {!result.isLoading && result.data.trips && result.data.trips.length === 0 && (<p>Não há viagens cadastradas!</p>)}
                 </div>
             </main>            
         </>

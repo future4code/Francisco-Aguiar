@@ -6,6 +6,8 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 import { useNavigate } from "react-router"
 
 
+
+
 const TripDetailsPage = () => {
     useProtectedPage()
     const navigate = useNavigate()
@@ -18,7 +20,6 @@ const TripDetailsPage = () => {
         axios
         .get(`${UrlBase}/trip/${pathParams.idtrip}`, {headers: {"auth" : token}})
         .then((res) => {
-            console.log("res",res.data.trip)
             setTripDetails(res.data.trip)
         })
         .catch((err) => {
@@ -80,13 +81,14 @@ const TripDetailsPage = () => {
     
     const candidatesApprovedList = tripDetails && tripDetails.approved.map((candidate) => {
         return(
-            <div>
-                <ul key={candidate.id}>
+            <div key={candidate.id}>
+                <ul>
                     <li>{candidate.name}</li>
                 </ul>
             </div>
         )
     })
+
 
     return(
         <>

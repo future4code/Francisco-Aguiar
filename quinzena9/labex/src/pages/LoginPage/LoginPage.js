@@ -8,7 +8,6 @@ const LoginPage = () => {
         email: "",
         password: "",
     })
-    console.log("info", informations)
     const navigate = useNavigate()
 
     const onClickLogin = async () => {
@@ -23,7 +22,6 @@ const LoginPage = () => {
                 "Content-Type": "application/json"
             })
             .then((response) => {
-                console.log("login", response.data)
                 token = response.data.token
             })
             .catch((err) => {
