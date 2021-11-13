@@ -3,6 +3,9 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router";
 import { UrlBase } from "../../constants/constants";
 import useProtectedPage from "../../hooks/useProtectedPage"
+import { Header } from "../../constants/stylesConstant"
+import { Main } from "../ApplicationFormPage/style"
+
 
 
 const CreateTripPage = () => {
@@ -52,11 +55,13 @@ const CreateTripPage = () => {
 
     return(
         <>
-            <header>
+            <Header>
                 <h2>Space Trips 🛸</h2>
-                <button onClick={() => navigate(-1)}>Voltar</button>
-            </header>
-            <main>
+                <div>
+                    <button onClick={() => navigate(-1)}>Voltar</button>
+                </div>
+            </Header>
+            <Main>
                 <h1>Criar Viagem</h1>
                 <form onSubmit={createTrip}>
                     <input 
@@ -83,21 +88,23 @@ const CreateTripPage = () => {
                     <input 
                         placeholder= "Descrição" 
                         type="text" 
+                        minLength="20"
                         value={inputText.description} 
                         onChange={(e) => {setInputText({...inputText, description: e.target.value})}}
                         required 
                     />
                     <input 
                         placeholder= "Duração em Dias" 
-                        type="number" 
+                        type="number"
+                        min="0" 
                         value={inputText.durationInDays} 
                         onChange={(e) => {setInputText({...inputText, durationInDays: e.target.value})}}
                         required 
                     />
                     
-                    <button type= "submit">enviar</button>
+                    <button type= "submit">Enviar</button>
                 </form>
-            </main>
+            </Main>
         </>
     )
 }

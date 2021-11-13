@@ -3,6 +3,8 @@ import { useNavigate } from "react-router"
 import { UrlBase } from "../../constants/constants"
 import axios from "axios"
 import { useRequestGet } from "../../hooks/useRequest"
+import { Header } from "../../constants/stylesConstant"
+import { Main } from "./style"
 
 
 const ApplicationFormPage = () => {
@@ -58,12 +60,14 @@ const ApplicationFormPage = () => {
 
     return(
         <>
-            <header>
+            <Header>
                 <h2>Space Trips 🛸</h2>
-                <button onClick = {() => navigate("/")}>Home</button>
-                <button onClick= {() => navigate("/listtrips")}>Ver Lista de Viagens</button>
-            </header>
-            <main>
+                <div>
+                    <button onClick = {() => navigate("/")}>Home</button>
+                    <button onClick= {() => navigate("/listtrips")}>Ver Lista de Viagens</button>
+                </div>
+            </Header>
+            <Main>
                 <h1>Inscreva-se para uma viagem!</h1>
                 <form onSubmit={OnClickApplyToTrip}>
                     <select 
@@ -96,6 +100,7 @@ const ApplicationFormPage = () => {
                         placeholder="Texto de Candidatura" 
                         value={inputInformations.applicationText} 
                         onChange={(e)=> setInputInformations({...inputInformations, applicationText: e.target.value})}
+                        minLength="20"
                         required
                     />
 
@@ -293,7 +298,7 @@ const ApplicationFormPage = () => {
                      
                 </form>
 
-            </main>
+            </Main>
         </>
     )
 }

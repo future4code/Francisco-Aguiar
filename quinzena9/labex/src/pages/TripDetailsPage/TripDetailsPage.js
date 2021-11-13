@@ -4,7 +4,8 @@ import { useParams } from "react-router";
 import { UrlBase } from "../../constants/constants";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { useNavigate } from "react-router"
-
+import { Header } from "../../constants/stylesConstant";
+import { Main, CandidatePending, ApprovedCandidate, DetailsTrip } from "./style";
 
 const TripDetailsPage = () => {
     useProtectedPage()
@@ -65,7 +66,7 @@ const TripDetailsPage = () => {
 
     const candidatesPendingList = tripDetails && tripDetails.candidates.map((candidate) => {
         return(
-            <div key={candidate.id}>
+            <CandidatePending key={candidate.id}>
                 <p><b>Nome:</b> {candidate.name}</p>
                 <p><b>Idade:</b> {candidate.age}</p>
                 <p><b>Profissão:</b> {candidate.profession}</p>
@@ -75,48 +76,50 @@ const TripDetailsPage = () => {
                     <button onClick = {() => onClickDecideCandidate(candidate.id, "acepted")}>Aceitar</button>
                     <button onClick = {() => onClickDecideCandidate(candidate.id, "rejected")}>Rejeitar</button>
                 </div>
-            </div>
+            </CandidatePending>
         )
     })
     
     const candidatesApprovedList = tripDetails && tripDetails.approved.map((candidate) => {
         return(
-            <div key={candidate.id}>
+            <ApprovedCandidate key={candidate.id}>
                 <ul>
                     <li>{candidate.name}</li>
                 </ul>
-            </div>
+            </ApprovedCandidate>
         )
     })
 
 
     return(
         <>
-            <header>
+            <Header>
                 <h2>Space Trips 🛸</h2>
-                <button onClick = {() => navigate(-1)}>Voltar</button>
-            </header>
-            <main>
                 <div>
+                    <button onClick = {() => navigate(-1)}>Voltar</button>
+                </div>
+            </Header>
+            <Main>
+                <div className= "container">
                     {tripDetails && (
-                        <>
+                        <DetailsTrip>
                             <h2>{tripDetails.name}</h2>
                             <p><b>Descrição:</b> {tripDetails.description}</p>
                             <p><b>Planeta:</b> {tripDetails.planet}</p>
                             <p><b>Duração:</b> {tripDetails.durationInDays} dias</p>
                             <p><b>Data:</b> {tripDetails.date}</p>                            
-                        </>
+                        </DetailsTrip>
                     )}
                 </div>
-                <div>
+                <div className= "container">
                     <h2>Candidatos Pendentes</h2>
                     {tripDetails && candidatesPendingList}
                 </div>
-                <div>
+                <div className= "container">
                     <h2>Candidatos Aprovados</h2>
                     {tripDetails && candidatesApprovedList}
                 </div>
-            </main>
+            </Main>
         </>
     )
 }

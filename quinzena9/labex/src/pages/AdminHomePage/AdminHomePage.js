@@ -3,6 +3,9 @@ import { useNavigate } from "react-router"
 import useProtectedPage from "../../hooks/useProtectedPage"
 import axios from "axios"
 import { useRequestGet } from "../../hooks/useRequest"
+import { Header } from "../../constants/stylesConstant"
+import { Trip, Main, ButtonCreateTrip } from "./style"
+import { useEffect } from "react"
 
 
 
@@ -16,13 +19,17 @@ const AdminHomePage = () => {
 
     const listTrips = result.data.trips && result.data.trips.map((trip) => {
         return(
-            <div key={trip.id}>
+            <Trip key={trip.id}>
                 <h3>{trip.name}</h3>
-                <button onClick = {() => goTripDetailsPage(trip.id)}>Detalhes</button>
-                <button onClick= {() => deleteTrip(trip.id)}>Excluir</button>
-            </div>
+                <div>
+                    <button onClick = {() => goTripDetailsPage(trip.id)}>Detalhes</button>
+                    <button onClick= {() => deleteTrip(trip.id)}>Excluir</button>
+                </div>
+            </Trip>
         )
     })
+
+    useEffect(() => {},[])
     
     const goTripDetailsPage = (id) => {
         navigate(`tripdetails/${id}`)
@@ -45,7 +52,7 @@ const AdminHomePage = () => {
             })
             .then((res) => {
                 alert("Viagem excluida com sucesso!")
-                window.location.reload() // ajustar isso aqui!!
+                window.location.reload()
             })
             .catch((err) => {
                 alert("Erro! Não foi possível excluir esta viagem.")
@@ -56,21 +63,23 @@ const AdminHomePage = () => {
 
     return (
         <>
-            <header>
+            <Header>
                 <h2>Space Trips 🛸</h2>
-                <button onClick= {() => {navigate("/")}}>Home</button>
-                <button onClick = {onClickLogout}>Logout</button>
-            </header>
-            <main>
+                <div>
+                    <button onClick= {() => {navigate("/")}}>Home</button>
+                    <button onClick = {onClickLogout}>Logout</button>
+                </div>
+            </Header>
+            <Main>
                 <h1>Área Administrativa</h1>
-                <button onClick={() => navigate("/admin/createtrip")}>Criar Viagem</button>
+                <ButtonCreateTrip onClick={() => navigate("/admin/createtrip")}>Criar Viagem</ButtonCreateTrip>
                 <div>
                     {result.isLoading && <p>Carregando...</p>}
                     {!result.isLoading && result.error && <p>Ocorreu um erro!</p>}
                     {!result.isLoading && result.data.trips && result.data.trips.length > 0 && listTrips}
                     {!result.isLoading && result.data.trips && result.data.trips.length === 0 && (<p>Não há viagens cadastradas!</p>)}
                 </div>
-            </main>            
+            </Main>            
         </>
     )
 }

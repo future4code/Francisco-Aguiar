@@ -1,33 +1,40 @@
 import styled from "styled-components";
 
-export const Home = styled.div`
+export const Main = styled.main`
     display: flex;
     flex-direction: column;
-    text-align: center;
     align-items: center;
-    justify-content: center;
-    background-color: black;
-    height: 100vh;
-    color: slategray;
+    text-align: center;
+    min-height: 75vh;
+    margin-bottom: 40px;
 
-    .containerPai{
-        border: 1px solid black;
-        height: 40vh;
-        width: 35vw;
-        background-color: white;
+    form{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        border-radius: 50px;
-        box-shadow: 5px 2px  5px 5px gray;
+    
 
-        div{
-            display: flex;
-            justify-content: space-between;
-            gap: 25px;
+        input{
+            width: 482px;
+            height: 30px;
+            border-radius: 10px;
+            padding: 4px 8px;
+            border-width: 1px;
+            border-color: gray;
+            margin: 0px 0px 15px;
+        }
 
-            button{
+        select{
+            width: 500px;
+            height: 40px;
+            border-radius: 10px;
+            padding: 4px 8px;
+            border-width: 1px;
+            margin: 0px 0px 15px;
+        }
+
+        button{
                 cursor: pointer;
                 height: 40px;
                 border: none;
@@ -41,6 +48,6 @@ export const Home = styled.div`
             button:hover{
                 background-color: #2f4f4f;
             }
-        }
+
     }
 `

@@ -2,6 +2,8 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router"
 import { UrlBase } from "../../constants/constants"
+import { Header } from "../../constants/stylesConstant";
+import { Main } from "./style";
 
 const LoginPage = () => {
     const [informations, setInformations] = useState({
@@ -40,11 +42,13 @@ const LoginPage = () => {
 
     return(
         <>
-            <header>
+            <Header>
                 <h2>Space Trips 🛸</h2>
-                <button onClick= {() => {navigate("/")}}>Home</button>
-            </header>
-            <main>
+                <div>
+                    <button onClick= {() => {navigate("/")}}>Home</button>
+                </div>
+            </Header>
+            <Main>
                 <form onSubmit= {onClickLogin}>
                     <h1>Login</h1>
                     <input 
@@ -63,7 +67,7 @@ const LoginPage = () => {
                     />
                     <button type="submit" >Login</button>
                 </form>
-            </main>
+            </Main>
 
         </>
     )
