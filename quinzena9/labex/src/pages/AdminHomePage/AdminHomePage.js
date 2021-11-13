@@ -45,7 +45,7 @@ const AdminHomePage = () => {
             })
             .then((res) => {
                 alert("Viagem excluida com sucesso!")
-                window.location.reload()
+                window.location.reload() // ajustar isso aqui!!
             })
             .catch((err) => {
                 alert("Erro! Não foi possível excluir esta viagem.")

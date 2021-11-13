@@ -6,8 +6,6 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 import { useNavigate } from "react-router"
 
 
-
-
 const TripDetailsPage = () => {
     useProtectedPage()
     const navigate = useNavigate()
@@ -15,6 +13,7 @@ const TripDetailsPage = () => {
     const pathParams = useParams()
     const token = localStorage.getItem("token")
     const [updatePage, setUpdatePage] = useState(false)
+
 
     useEffect(() => {
         axios
@@ -43,6 +42,7 @@ const TripDetailsPage = () => {
                 .catch((err) => {
                     alert("Ocorreu um erro! Tente novamente.")
                 })
+
         }
         else if(response === "rejected"){
             axios
