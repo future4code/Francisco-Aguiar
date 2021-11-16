@@ -1,6 +1,5 @@
 import axios from "axios"
-import { useEffect } from "react"
-import { useState } from "react/cjs/react.development"
+import { useEffect, useState } from "react"
 
 
 export const useRequestGet = (url, header) => {
